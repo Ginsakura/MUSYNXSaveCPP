@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DifficultyScoreAnalyzeClass</class>
+ <widget class="QWidget" name="DifficultyScoreAnalyzeClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>739</width>
+    <height>801</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>难度与分数散点图</string>
+  </property>
+  <widget class="QtCharts::QChartView" name="difficultyScoreAnalyze">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>451</width>
+     <height>801</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k401Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>10</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 01 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k402Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>30</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 02 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k403Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>50</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 03 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k404Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>70</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 04 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k405Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>90</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 05 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k406Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>110</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 06 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k407Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>130</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 07 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k408Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>150</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 08 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k409Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>170</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 09 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k601Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>330</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 01 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k412Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>230</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 12 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k415Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>290</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 15 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k410Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>190</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 10 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k414Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>270</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 14 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k411Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>210</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 11 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k413Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>250</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 4K 13 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k602Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>350</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 02 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k610Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>510</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 10 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k609Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>490</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 09 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k605Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>410</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 05 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k608Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>470</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 08 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k615Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>610</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 15 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k613Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>570</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 13 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k603Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>370</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 03 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k614Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>590</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 14 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k611Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>530</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 11 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k607Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>450</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 07 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k604Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>390</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 04 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k612Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>550</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 12 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="k606Label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>430</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>霞鹜文楷等宽</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>难度: 6K 06 Avg: 000.000% 计数: 00</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>qchartview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
