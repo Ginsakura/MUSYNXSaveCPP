@@ -5,6 +5,7 @@ static bool isRandomInit = false;
 unsigned SetSeed(void);
 int Randint(int, int);
 double Random(double, double);
+double GetScreenScale();
 //std::string FgColor(int, int, int);
 //std::string FgColor(int, int, int);
 //std::string ResetColor(void);

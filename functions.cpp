@@ -44,3 +44,15 @@ QString QResetColor() {
 	QString s = "\033[m";
 	return s;
 }
+double GetScreenScale() {
+	int screenW = ::GetSystemMetrics(SM_CXSCREEN);
+	int screenH = ::GetSystemMetrics(SM_CYSCREEN);
+	//std::cout << "screenW =" << screenW << "screenH=" << screenH << std::endl;
+	//HWND hwd = ::GetDesktopWindow();
+	HDC hdc = ::GetDC(::GetDesktopWindow());
+	int width = ::GetDeviceCaps(hdc, DESKTOPHORZRES);
+	int height = ::GetDeviceCaps(hdc, DESKTOPVERTRES);
+	//std::cout << "width=" << width << "height=" << height << std::endl;
+	double scale = (double)width / screenW;
+	return scale;
+}
