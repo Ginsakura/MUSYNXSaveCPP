@@ -21,6 +21,9 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="CSharpCode">
+      <UniqueIdentifier>{785ed8bc-d948-4460-a9c6-44028aef9e14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="MUSYNCSavDecode.qrc">
@@ -46,9 +49,18 @@
     <ClCompile Include="functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sql.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HitDelay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DifficultyScoreAnalyze.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HitDelay.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -56,9 +68,15 @@
     <QtUic Include="DifficultyScoreAnalyze.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="HitDelay.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sql.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -66,5 +84,17 @@
     <None Include="readme.md" />
     <None Include=".gitignore" />
     <None Include="LICENSE" />
+    <None Include="CSharp Code\ConsoleInput.cs">
+      <Filter>CSharpCode</Filter>
+    </None>
+    <None Include="CSharp Code\ConsoleWindow.cs">
+      <Filter>CSharpCode</Filter>
+    </None>
+    <None Include="CSharp Code\GloHasConsole.cs">
+      <Filter>CSharpCode</Filter>
+    </None>
+    <None Include="CSharp Code\JudgeGrade.cs">
+      <Filter>CSharpCode</Filter>
+    </None>
   </ItemGroup>
 </Project>

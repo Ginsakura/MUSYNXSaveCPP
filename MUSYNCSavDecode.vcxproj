@@ -195,8 +195,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HitDelay.cpp" />
+    <ClCompile Include="sql.cpp" />
     <QtRcc Include="MUSYNCSavDecode.qrc" />
     <QtUic Include="DifficultyScoreAnalyze.ui" />
+    <QtUic Include="HitDelay.ui" />
     <QtUic Include="MUSYNCSavDecode.ui" />
     <QtMoc Include="MUSYNCSavDecode.h" />
     <ClCompile Include="DifficultyScoreAnalyze.cpp" />
@@ -209,9 +212,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
+    <QtMoc Include="HitDelay.h" />
+    <ClInclude Include="sql.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="CSharp Code\ConsoleInput.cs" />
+    <None Include="CSharp Code\ConsoleWindow.cs" />
+    <None Include="CSharp Code\GloHasConsole.cs" />
+    <None Include="CSharp Code\JudgeGrade.cs" />
     <None Include="LICENSE" />
     <None Include="readme.md" />
   </ItemGroup>

@@ -3,15 +3,11 @@
 #include <QtCharts>
 #include <QDebug>
 #include <QDesktopServices>
-#include <QList>
 #include <QMainWindow>
-#include <QSqlDatabase>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QString>
 #include <QUrl>
 #include "ui_MUSYNCSavDecode.h"
 #include "functions.h"
+#include "DifficultyScoreAnalyze.h"
 
 #define qout qDebug().noquote().nospace()
 
@@ -28,4 +24,8 @@ private slots:
 
 private:
     Ui::MUSYNCSavDecodeClass ui;
+    const bool isPreRelease = true;
+    const QString version = "0.0.2";
+    const int rcVersion = 1;
+    const int preVersion = 1;
 };
