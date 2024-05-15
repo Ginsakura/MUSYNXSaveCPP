@@ -1,4 +1,4 @@
-#include "sql.h"
+ï»¿#include "sql.h"
 #include "functions.h"
 
 SQLOperat::SQLOperat(QSqlDatabase db) {
@@ -10,7 +10,7 @@ SQLOperat::SQLOperat() {
 	DB = QSqlDatabase::addDatabase("QSQLITE");
 	DB.setDatabaseName("HitDelayHistory_v2.db");
 	if (!DB.open()) {
-		qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("´ò¿ªÊ§°Ü") << QResetColor();
+		qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("æ‰“å¼€å¤±è´¥") << QResetColor();
 	}
 	cursor = QSqlQuery(DB);
 	bool create = false;
@@ -33,10 +33,10 @@ SQLOperat::SQLOperat() {
 			");");
 		create = cursor.exec();
 		if (create) {
-			qout << QFgColor(0, 0xff, 0) << QString::fromLocal8Bit("HitDelayHistory±í´´½¨³É¹¦»òÒÑ´æÔÚ") << QResetColor();
+			qout << QFgColor(0, 0xff, 0) << QString::fromLocal8Bit("HitDelayHistoryè¡¨åˆ›å»ºæˆåŠŸæˆ–å·²å­˜åœ¨") << QResetColor();
 		}
 		else {
-			qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("HitDelayHistory±í´´½¨Ê§°Ü: ") << QResetColor() << cursor.lastError();
+			qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("HitDelayHistoryè¡¨åˆ›å»ºå¤±è´¥: ") << QResetColor() << cursor.lastError();
 		}
 	}
 }

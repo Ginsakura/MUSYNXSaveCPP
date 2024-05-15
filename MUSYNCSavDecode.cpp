@@ -1,4 +1,6 @@
-#include "MUSYNCSavDecode.h"
+﻿#include "MUSYNCSavDecode.h"
+#include "HitDelay.h"
+#include "DifficultyScoreAnalyze.h"
 
 MUSYNCSavDecode::MUSYNCSavDecode(QWidget *parent)
     : QMainWindow(parent) {
@@ -11,8 +13,81 @@ MUSYNCSavDecode::MUSYNCSavDecode(QWidget *parent)
 }
 
 void MUSYNCSavDecode::on_openRepoBtn_clicked() {
-    QDesktopServices::openUrl(QUrl("https://github.com/Ginsakura/MUSYNCSave"));
+    QDesktopServices::openUrl(QUrl("https://github.com/Ginsakura/MUSYNCSaveCPP"));
 }
 
+void MUSYNCSavDecode::on_flushBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_isGameRunning_linkActivated() {
+
+}
+
+void MUSYNCSavDecode::on_playedBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_unplayBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_rankEXBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_rankSBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_rankABtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_rankBBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_rankCBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_favoBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_redEXBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_blackEXBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_filterSongsBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_filterKeysBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_filterDifficultsBtn_clicked() {
+
+}
+
+void MUSYNCSavDecode::on_hitDelayBtn_clicked() {
+    HitDelay* hitDelayWindow = new HitDelay;
+    hitDelayWindow->show();
+}
+
+void MUSYNCSavDecode::on_difficultyScoreAnalyzeBtn_clicked() {
+    DifficultyScoreAnalyze* diffSAWindow = new DifficultyScoreAnalyze;
+    diffSAWindow->show();
+}
+
+void MUSYNCSavDecode::on_openSaveFileBtn_clicked() {
+
+}
 
 MUSYNCSavDecode::~MUSYNCSavDecode() {}

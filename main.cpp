@@ -1,4 +1,4 @@
-#include "MUSYNCSavDecode.h"
+﻿#include "MUSYNCSavDecode.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
