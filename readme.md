@@ -1,4 +1,4 @@
-# ͬ������������ Steam�� �浵�������� C++�ع���
+﻿# 同步音律喵赛克 Steam端 存档解析工具 C++重构版
 MUSYNX Steam Client Savefile Decode & Analyze Tool C++ Version
 
 [down_svg]: https://img.shields.io/github/downloads/ginsakura/MUSYNCSaveCPP/total?label=All%20Downloads
@@ -21,108 +21,118 @@ MUSYNX Steam Client Savefile Decode & Analyze Tool C++ Version
 ## How to use
 
 1. [English (English, `en-us`) v1.2.6 rc2](How_to_use.en.md)
-2. [�������� (Simplified Chinese, `zh-Hans`) v1.2.6 rc2](How_to_use.zh.md)
+2. [简体中文 (Simplified Chinese, `zh-Hans`) v1.2.6 rc2](How_to_use.zh.md)
 
-## ����չʾ
+## 界面展示
 
 <details>
-<summary>����չʾ</summary>
+<summary>界面展示</summary>
 
-![��ҳ��](./ReadmeResources/main.png "��ҳ��")
-![score-diffҳ��](./ReadmeResources/score-diff.png "score-diffҳ��")
-![HitDelayҳ��](./ReadmeResources/HitDelay.png "HitDelayҳ��")
-![HitAnalyze-Pie&Barҳ��](./ReadmeResources/HitAnalyze-Pie&Bar.png "HitAnalyze-Pie&Barҳ��")
-![HitAnalyze-Lineҳ��](./ReadmeResources/HitAnalyze-Line.png "HitAnalyze-Lineҳ��")
-![AllHitAnalyze-Pieҳ��](./ReadmeResources/AllHitAnalyze.png "AllHitAnalyzeҳ��")
-![AvgAcc-SYNC.Rate�ع����ҳ��](./ReadmeResources/AvgAcc-SYNC.Rate.png "AvgAcc-SYNC.Rate�ع����")
+![主页面](./ReadmeResources/main.png "主页面")
+![score-diff页面](./ReadmeResources/score-diff.png "score-diff页面")
+![HitDelay页面](./ReadmeResources/HitDelay.png "HitDelay页面")
+![HitAnalyze-Pie&Bar页面](./ReadmeResources/HitAnalyze-Pie&Bar.png "HitAnalyze-Pie&Bar页面")
+![HitAnalyze-Line页面](./ReadmeResources/HitAnalyze-Line.png "HitAnalyze-Line页面")
+![AllHitAnalyze-Pie页面](./ReadmeResources/AllHitAnalyze.png "AllHitAnalyze页面")
+![AvgAcc-SYNC.Rate回归分析页面](./ReadmeResources/AvgAcc-SYNC.Rate.png "AvgAcc-SYNC.Rate回归分析")
 
 </details>
 
-## �ƻ�
-### δ���ļƻ�
-- [ ] �ṩȫ�����а���ʾ���� (��Ҫ����SteamAPI)
-- [ ] ���ṩһ���ĵ�����ʾʹ�÷��� (��д��,������)
-- [ ] ʹ���ļ�����ָ���ļ����ķ�ʽ�Զ�������UI
-### ����ɵļƻ�
-- [x] һ����ȡ�ϴ�����������
-- [x] ʹ��GitHub Action workflowʵ���Զ��ַ�
-- [x] ���Ű�SongName.json
-- [x] ���������ؼ��غ󱣳�λ�ò���
-- [x] ����cmd����
-- [x] ����Windows��Դ������һ��ʹ���б�������������
-- [x] ���߼���������Ϊ`ExtraFunction.cfg`�����ļ�
+## 计划
+### 未来的计划
+- [ ] 提供全球排行榜显示功能 (需要调用SteamAPI)
+- [ ] 将提供一个文档来演示使用方法 (在写了,咕咕咕)
+- [ ] 使用文件夹内指定文件名的方式自定义美化UI
+### 已完成的计划
+- [x] 一键获取上次谱面游玩结果
+- [x] 使用GitHub Action workflow实现自动分发
+- [x] 重排版SongName.json
+- [x] 滑动条在重加载后保持位置不变
+- [x] 隐藏cmd窗口
+- [x] 将像Windows资源管理器一样使用列标题栏进行排序
+- [x] 将高级功能整合为`ExtraFunction.cfg`配置文件
 
-## Release�汾˵��
-NoConsole�汾Ϊû��������ʾ�����棬�ʺ�����ʹ��
+## Release版本说明
+NoConsole版本为没有命令提示符界面，适合正常使用
 
-WithConsole�汾Ϊ��������ʾ�����棬�ʺϳ���bugʱ���ٶ�λ�������ص��Լ�ԭ��
+WithConsole版本为带命令提示符界面，适合出现bug时快速定位错误发生地点以及原因
 
-## ���ܿ���ģ��
+## 功能控制模块
 <details>
-<summary>���Ʋ������</summary>
+<summary>控制参数详解</summary>
 
-��`./musync_data/ExtraFunction.cfg`�ļ�������/���ö�Ӧ����
+于`./musync_data/ExtraFunction.cfg`文件中启用/禁用对应功能
 
-|               ������              |     Ĭ��ֵ    | ֵ���� |                                ����˵��                                |
+|               配置项              |     默认值    | 值类型 |                                配置说明                                |
 |-----------------------------------|---------------|--------|------------------------------------------------------------------------|
-| `EnableAcc-Sync`                  |false          |boolean |�Ƿ�����Acc-Synxͼ��                                                    |
-| `DisableCheckUpdate`              |false          |boolean |�Ƿ���ø��¼��                                                        |
-| `EnableAnalyzeWhenStarting`       |false          |boolean |�Ƿ�����ÿ������ʱ����ɨ��浵�ļ�                                      |
-| `EnableDLLInjection`              |false          |boolean |�Ƿ�����DLLע���Կ���`�߼�����`                                         |
-| `SystemDPI`                       |`�Զ���ȡ`     |string  |��ȡϵͳDPI, �ṩDPI��������(δʵ��)                                    |
-| `EnableDonutChartinHitDelay`      |false          |boolean |�Ƿ��ڵ�������ͳ������ʾ�����ӳٻ���ͼ                                  |
-| `EnableDonutChartinAllHitAnalyze` |false          |boolean |�Ƿ���ȫ��ͳ������ʾ�����ӳٻ���ͼ                                      |
-| `EnablePDFofCyanExact`            |false          |boolean |�Ƿ���ȫ��ͳ������ʾ��CyanExact����̬�ֲ����                           |
-| `EnableNarrowDelayInterval`       |true           |boolean |�Ƿ��ڵ�������ͳ����ʹ�ø���խ�Ļ�������������ƽ��ƫ��ֵ(Delay)<br>[true=45ms,false=90ms]|
-| `ConsoleAlpha`                    |75             |int     |��������Ϸ�������̨���ڵĲ�͸����<br>(ȡֵ��Χ[0,100],100Ϊ��ȫ��͸��,������ȡֵ��30����)|
-| `ConsoleFont`                     |'ϼ���Ŀ��ȿ�' |string  |��������Ϸ�������̨���ڵ�����                                          |
-| `ConsoleFontSize`                 |36             |int     |��������Ϸ�������̨���ڵ��ֺ�                                          |
-| `MainExecPath`                    |`�Զ���ȡ`     |string  |��������Ϸ�������������ڵ�·��                                          |
-| `ChangeConsoleStyle`              |false          |boolean |�Ƿ������Զ�����������Ϸ�������̨������ʽ                              |
-| `EnableFramelessWindow`           |false          |boolean |�Ƿ������ޱ߿򴰿���ʽ(δ���)                                          |
-| `TransparentColor`                |'#FFFFFF'      |string<br>boolean |����͸��ɫ(��������ʽ)<br>����Ϊfalse��Ϊ�ر�͸��ɫ           |
-| `DefaultKeys`                     |false          |boolean |`�߼�����`��Ĭ��`����`����                                              |
-| `DefaultDiffcute`                 |0              |int     |`�߼�����`��Ĭ��`�Ѷ�`����                                              |
+| `EnableAcc-Sync`                  |false          |boolean |是否启用Acc-Synx图表                                                    |
+| `DisableCheckUpdate`              |false          |boolean |是否禁用更新检测                                                        |
+| `EnableAnalyzeWhenStarting`       |false          |boolean |是否启用每次启动时重新扫描存档文件                                      |
+| `EnableDLLInjection`              |false          |boolean |是否启用DLL注入以开启`高级功能`                                         |
+| `SystemDPI`                       |`自动获取`     |string  |读取系统DPI, 提供DPI窗体修正(未实现)                                    |
+| `EnableDonutChartinHitDelay`      |false          |boolean |是否在单次游玩统计中显示击打延迟环形图                                  |
+| `EnableDonutChartinAllHitAnalyze` |false          |boolean |是否在全局统计中显示击打延迟环形图                                      |
+| `EnablePDFofCyanExact`            |false          |boolean |是否在全局统计中显示仅CyanExact的正态分布拟合                           |
+| `EnableNarrowDelayInterval`       |true           |boolean |是否在单次游玩统计中使用更狭窄的击打区间来计算平均偏移值(Delay)<br>[true=45ms,false=90ms]|
+| `ConsoleAlpha`                    |75             |int     |喵赛克游戏本体控制台窗口的不透明度<br>(取值范围[0,100],100为完全不透明,不建议取值在30以下)|
+| `ConsoleFont`                     |'霞鹜文楷等宽' |string  |喵赛克游戏本体控制台窗口的字体                                          |
+| `ConsoleFontSize`                 |36             |int     |喵赛克游戏本体控制台窗口的字号                                          |
+| `MainExecPath`                    |`自动获取`     |string  |喵赛克游戏本体主程序所在的路径                                          |
+| `ChangeConsoleStyle`              |false          |boolean |是否启用自定义喵赛克游戏本体控制台窗口样式                              |
+| `EnableFramelessWindow`           |false          |boolean |是否启用无边框窗口样式(未完成)                                          |
+| `TransparentColor`                |'#FFFFFF'      |string<br>boolean |设置透明色(仅限新样式)<br>设置为false即为关闭透明色           |
+| `DefaultKeys`                     |false          |boolean |`高级功能`中默认`键数`参数                                              |
+| `DefaultDiffcute`                 |0              |int     |`高级功能`中默认`难度`参数                                              |
 
 </details>
 
-### �߼����ܼ��
-�����������Ϸ�ͻ������޸�,�����ʹ��
+### 高级功能简介
+下列组件对游戏客户端有修改,请谨慎使用
 
-*** $\color{Red}{ ע�ⱸ�� ע�ⱸ�� ע�ⱸ�� }$ ***
+*** $\color{Red}{ 注意备份 注意备份 注意备份 }$ ***
 
-$\color{Red}{�����о����Ƿ�ʹ��,ʹ�ù����г����κ�����}$
-$\color{Red}{����Ը�,�����߸Ų�����}$
+$\color{Red}{请自行决定是否使用,使用过程中出现任何意外}$
+$\color{Red}{后果自负,开发者概不负责}$
 
-HitDelayģ���÷�:����DLLע���,�ڱ�����Ϸ�����״���������ʱ���һ��cmd���� $\color{Red}{����رոô���}$
+HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩时会打开一个cmd窗口 $\color{Red}{请勿关闭该窗口}$
 
-- `HitDelayFix.dll` �������޸Ĺ��Ŀͻ����ļ�,ԭʼ�ļ�Ϊ`./MUSYNX_Data/Managed/Assembly-CSharp.dll`.
-- `HitDelayLine.py` ���ڶ�ȡ`./musync_data/HitDelay.log`�еĻ�����Ϣ���ɿ��ӻ����ݱ�,�������ṩ����ͳ����Ϣ.
-    - `AvgDelay` ƽ�������ӳ�,�����л����ƽ��ֵ,�ܹ�һ���̶�����ʾ��Ϸ�ӳ�Ӧ�õ�������ֵ(�����нϴ�ƫ��,�����ο�).
-    ������Ϸ���ж�������+010ms,AvgDelay��ֵΪ-5ms,��ô��Ӧ����Ϸ���ж���������5ms,���Ǿ�����Ҫ�����������β���.
-    - `AllKeys` �����д���note����Ŀ.
-    - `AvgAcc` ƽ������ƫ��,�����л���ľ���ֵ��ƽ��ֵ,��ֵ��Ϊ����.
-    ��ֵ��Ӧ������ǰ���汾���������Key��ʱ���ľ�׼��,��ֵ������������Ľ���ɼ���һ���Ĺ���:
+- `HitDelayFix.dll` 被精心修改过的客户端文件,原始文件为`./MUSYNX_Data/Managed/Assembly-CSharp.dll`.
+- `HitDelayLine.py` 用于读取`./musync_data/HitDelay.log`中的击打信息生成可视化数据表,标题栏提供三个统计信息.
+    - `AvgDelay` 平均击打延迟,即所有击打的平均值,能够一定程度上提示游戏延迟应该调整的数值(可能有较大偏差,仅供参考).
+    比如游戏内判定补偿是+010ms,AvgDelay数值为-5ms,那么就应将游戏内判定补偿减少5ms,但是具体需要调整多少请多次测试.
+    - `AllKeys` 谱面中存在note的数目.
+    - `AvgAcc` 平均击打偏差,即所有击打的绝对值的平均值,该值总为正数.
+    该值反应了您当前谱面本次游玩击打Key的时机的精准度,该值与您本次游玩的结算成绩有一定的关联:
 
-    ��ֵԽС,��˵���������Խ��׼,(�ڸ�ֵС��45msʱ������)��ֵ�ͻ�Խ��.
+    该值越小,就说明您击打的越精准,(在该值小于45ms时，您的)分值就会越高.
 
-## ������־
+## 更新日志
 <!--
 ### Version 
 #### PreRelease 
-1. ����
+1. 更新
     1. xxx
-2. �޸�
+2. 修复
     1. xxx
-3. �Ż�
+3. 优化
     1. xxx
 -->
 
-## ��ʼ����Ŀ(��δ�ﵽ���ñ�׼)
-### Version 0.0.2
-1. ���ӻ�ȡϵͳDPI����
-2. ΢��UI
-### Version 0.0.1
-1. ��ʼ����Ŀ������
+## 初始化项目(尚未达到可用标准)
+### Version 0.0.4
 
-## ���������`����`�Դ浵�ļ�����`д`����
+### Version 0.0.3
+1. 从Python项目添加资源文件
+2. 微调UI布局
+3. 添加HitDelay窗口
+4. 主窗口添加版本显示
+5. 主窗口移除SQL相关库
+6. 主窗口添加版本信息
+7. 初步完成SQL封装
+### Version 0.0.2
+1. 添加获取系统DPI函数
+2. 微调UI
+### Version 0.0.1
+1. 初始化项目，搭建框架
+
+## 声明：妾身`不会`对存档文件进行`写`操作

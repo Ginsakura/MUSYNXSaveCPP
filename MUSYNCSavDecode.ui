@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ui version="4.0">
  <class>MUSYNCSavDecodeClass</class>
  <widget class="QMainWindow" name="MUSYNCSavDecodeClass">
@@ -316,7 +316,7 @@
 外</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="filterSongs">
+    <widget class="QPushButton" name="filterSongsBtn">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -330,7 +330,7 @@
 有</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="filterKeys">
+    <widget class="QPushButton" name="filterKeysBtn">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -343,7 +343,7 @@
       <string>All Keys</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="filterDifficults">
+    <widget class="QPushButton" name="filterDifficultsBtn">
      <property name="geometry">
       <rect>
        <x>70</x>

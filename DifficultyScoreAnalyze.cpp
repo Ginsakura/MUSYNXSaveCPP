@@ -1,11 +1,11 @@
-#include "DifficultyScoreAnalyze.h"
+ï»¿#include "DifficultyScoreAnalyze.h"
 
 DifficultyScoreAnalyze::DifficultyScoreAnalyze(QWidget *parent)
 	: QWidget(parent)
 {
     DSAui.setupUi(this);
-    QLineSeries* lineseries = new QLineSeries();//Í¼±íµÄÊý¾Ý¼¯
-    lineseries->append(0, 5);//appendºÍ<<¹¦ÄÜ²î²»¶à
+    QLineSeries* lineseries = new QLineSeries();//å›¾è¡¨çš„æ•°æ®é›†
+    lineseries->append(0, 5);//appendå’Œ<<åŠŸèƒ½å·®ä¸å¤š
     *lineseries << QPointF(13, 5) << QPointF(17, 6) << QPointF(20, 2);
 
     QChart* chart = new QChart();

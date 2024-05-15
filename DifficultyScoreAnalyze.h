@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QChart>
 #include <QChartGlobal>
