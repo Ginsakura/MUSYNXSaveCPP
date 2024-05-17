@@ -121,6 +121,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -212,6 +213,9 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="DifficultyScoreAnalyze\DifficultyScoreAnalyze.vcxproj">
+      <Project>{0e87c0cf-6590-46cc-9a5d-bff84841afb1}</Project>
+    </ProjectReference>
     <ProjectReference Include="Functions\Functions.vcxproj">
       <Project>{4598653c-c9ce-4c57-8c59-b7727d35aa40}</Project>
     </ProjectReference>
@@ -223,8 +227,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DifficultyScoreAnalyze.h" />
     <ClInclude Include="include\difficultyscoreanalyze_global.h" />
-    <QtMoc Include="include\DifficultyScoreAnalyze.h" />
     <ClInclude Include="include\Functions.h" />
     <ClInclude Include="include\functions_global.h" />
     <QtMoc Include="include\HitDelay.h" />

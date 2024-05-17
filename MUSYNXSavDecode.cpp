@@ -1,6 +1,4 @@
 ﻿#include "MUSYNXSavDecode.h"
-#include "HitDelay.h"
-#include "DifficultyScoreAnalyze.h"
 #include "Functions.h"
 
 //==================================================================

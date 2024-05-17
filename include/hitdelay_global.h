@@ -6,7 +6,7 @@
 # if defined(HITDELAY_LIB)
 #  define HITDELAY_EXPORT Q_DECL_EXPORT
 # else
-#  define HITDELAY_EXPORT Q_DECL_IMPORT
+#  define HITDELAY_EXPORT
 # endif
 #else
 # define HITDELAY_EXPORT

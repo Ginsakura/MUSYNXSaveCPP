@@ -26,16 +26,7 @@
     <ClInclude Include="hitdelay_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="HitDelay.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="HitDelay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClInclude Include="..\include\SQL.h">
@@ -49,5 +40,10 @@
     <QtUic Include="HitDelay.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="HitDelay.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

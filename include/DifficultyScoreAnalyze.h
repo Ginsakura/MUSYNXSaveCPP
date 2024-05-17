@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "difficultyscoreanalyze_global.h"
 #include <QChart>
 #include <QChartGlobal>

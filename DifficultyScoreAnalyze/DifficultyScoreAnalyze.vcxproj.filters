@@ -26,16 +26,7 @@
     <ClInclude Include="difficultyscoreanalyze_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <QtMoc Include="DifficultyScoreAnalyze.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="DifficultyScoreAnalyze.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -43,5 +34,10 @@
     <QtUic Include="DifficultyScoreAnalyze.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="DifficultyScoreAnalyze.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

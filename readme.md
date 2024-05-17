@@ -119,6 +119,14 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 -->
 
 ## 初始化项目(尚未达到可用标准)
+### Version 0.0.6
+1. 删除`stdafx`预编译头
+2. 修改moc目录
+3. 修改uic目录
+4. 添加引用树
+5. 删除`HitDelay`、`DifficultyScoreAnalyze`头文件中的`Q_DECL_IMPORT`
+6. 修复主界面头文件引用
+7. 使用前向声明的方式解决`Q_OBJECT`与`Q_DECL_IMPORT`冲突的问题
 ### Version 0.0.5
 1. 添加注释
 2. 对HitDelayHistoryORM添加切换Insert/Update函数

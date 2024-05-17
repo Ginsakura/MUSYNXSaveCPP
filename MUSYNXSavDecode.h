@@ -5,9 +5,15 @@
 #include <QDesktopServices>
 #include <QMainWindow>
 #include <QUrl>
+#include "HitDelay.h"
+#include "DifficultyScoreAnalyze.h"
 #include "ui_MUSYNXSavDecode.h"
 
 #define qout qDebug().noquote().nospace()
+
+// 前向声明
+class HitDelay;
+class DifficultyScoreAnalyze;
 
 typedef enum Filter {
     NoFilter = 0,
@@ -79,7 +85,7 @@ private:
     DiffcuteFilter diffcuteFilter = AllDiff;
 
     const bool isPreRelease = true;
-    const QString version = "0.0.2";
+    const QString version = "0.0.6";
     const int rcVersion = 1;
     const int preVersion = 1;
 };

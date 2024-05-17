@@ -45,14 +45,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="include\HitDelay.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="include\DifficultyScoreAnalyze.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="readme.md" />
     <None Include=".gitignore" />
     <None Include="LICENSE" />
@@ -70,6 +62,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DifficultyScoreAnalyze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\difficultyscoreanalyze_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,8 +83,10 @@
     <ClInclude Include="include\sql_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\difficultyscoreanalyze_global.h">
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="include\HitDelay.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </QtMoc>
   </ItemGroup>
 </Project>

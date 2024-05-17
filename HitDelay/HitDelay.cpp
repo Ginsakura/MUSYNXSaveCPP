@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "HitDelay.h"
+﻿#include "HitDelay.h"
 
 //==================================================================
 //函 数 名：

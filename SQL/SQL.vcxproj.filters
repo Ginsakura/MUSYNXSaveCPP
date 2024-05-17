@@ -29,12 +29,6 @@
     <ClCompile Include="SQL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClInclude Include="SQL.h">
       <Filter>Header Files</Filter>
     </ClInclude>

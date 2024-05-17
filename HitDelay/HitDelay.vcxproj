@@ -74,11 +74,17 @@
     <ClCompile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
+    <QtMoc>
+      <QtMocDir>$(OutDir)moc\</QtMocDir>
+    </QtMoc>
+    <QtUic>
+      <QtUicDir>$(OutDir)uic\</QtUicDir>
+    </QtUic>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>HITDELAY_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
@@ -90,7 +96,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <QtMoc>
-      <PrependInclude>stdafx.h;%(PrependInclude)</PrependInclude>
+      <PrependInclude>%(PrependInclude)</PrependInclude>
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
@@ -121,11 +127,6 @@
     <ClInclude Include="hitdelay_global.h" />
     <QtMoc Include="HitDelay.h" />
     <ClCompile Include="HitDelay.cpp" />
-    <ClInclude Include="stdafx.h" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="HitDelay.ui" />

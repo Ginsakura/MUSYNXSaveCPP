@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "SQL.h"
+﻿#include "SQL.h"
 #include "Functions.h"
 
 SQLOperat::SQLOperat() {

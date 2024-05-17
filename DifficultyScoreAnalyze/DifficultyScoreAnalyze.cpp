@@ -1,5 +1,4 @@
-﻿#include "stdafx.h"
-#include "DifficultyScoreAnalyze.h"
+﻿#include "DifficultyScoreAnalyze.h"
 
 //==================================================================
 //函 数 名：
