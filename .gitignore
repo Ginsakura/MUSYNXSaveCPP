@@ -69,4 +69,14 @@ Debug/
 *.dll
 *.exe
 *.db
+lib/
+*.lib
 
+# Musynx Execute File
+*.b64
+*.tmp
+*.psd
+*.ttf
+*.analyze
+*.decode
+*.sfp

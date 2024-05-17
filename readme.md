@@ -1,21 +1,21 @@
 ﻿# 同步音律喵赛克 Steam端 存档解析工具 C++重构版
 MUSYNX Steam Client Savefile Decode & Analyze Tool C++ Version
 
-[down_svg]: https://img.shields.io/github/downloads/ginsakura/MUSYNCSaveCPP/total?label=All%20Downloads
-[all_release]: https://github.com/Ginsakura/MUSYNCSaveCPP/releases
-[commit_svg]: https://img.shields.io/github/commit-activity/t/ginsakura/MUSYNCSaveCPP?label=All%20Commits
-[commit]: https://github.com/Ginsakura/MUSYNCSaveCPP/commits
-[license_svg]: https://img.shields.io/github/license/ginsakura/MUSYNCSaveCPP?label=License
+[down_svg]: https://img.shields.io/github/downloads/ginsakura/MUSYNXSaveCPP/total?label=All%20Downloads
+[all_release]: https://github.com/Ginsakura/MUSYNXSaveCPP/releases
+[commit_svg]: https://img.shields.io/github/commit-activity/t/ginsakura/MUSYNXSaveCPP?label=All%20Commits
+[commit]: https://github.com/Ginsakura/MUSYNXSaveCPP/commits
+[license_svg]: https://img.shields.io/github/license/ginsakura/MUSYNXSaveCPP?label=License
 [![All releases][down_svg]][all_release]
 [![All commit activity (branch)][commit_svg]][commit]
 [![License][license_svg]](./LICENSE)
 
-[latest_prerelease_svg]: https://img.shields.io/github/v/release/ginsakura/MUSYNCSaveCPP?display_name=release&label=Latest%20PreRelease&include_prereleases
-[all_tags]: https://github.com/Ginsakura/MUSYNCSaveCPP/tags
+[latest_prerelease_svg]: https://img.shields.io/github/v/release/ginsakura/MUSYNXSaveCPP?display_name=release&label=Latest%20PreRelease&include_prereleases
+[all_tags]: https://github.com/Ginsakura/MUSYNXSaveCPP/tags
 [![Latest tag][latest_prerelease_svg]][all_tags]
 
-[latest_release_svg]: https://img.shields.io/github/v/release/ginsakura/MUSYNCSaveCPP?display_name=release&label=Latest%20Release
-[release]: https://github.com/Ginsakura/MUSYNCSaveCPP/releases/latest
+[latest_release_svg]: https://img.shields.io/github/v/release/ginsakura/MUSYNXSaveCPP?display_name=release&label=Latest%20Release
+[release]: https://github.com/Ginsakura/MUSYNXSaveCPP/releases/latest
 [![latest release][latest_release_svg]][release]
 
 ## How to use
@@ -61,7 +61,7 @@ WithConsole版本为带命令提示符界面，适合出现bug时快速定位错
 <details>
 <summary>控制参数详解</summary>
 
-于`./musync_data/ExtraFunction.cfg`文件中启用/禁用对应功能
+于`./musynx_data/ExtraFunction.cfg`文件中启用/禁用对应功能
 
 |               配置项              |     默认值    | 值类型 |                                配置说明                                |
 |-----------------------------------|---------------|--------|------------------------------------------------------------------------|
@@ -97,14 +97,14 @@ $\color{Red}{后果自负,开发者概不负责}$
 HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩时会打开一个cmd窗口 $\color{Red}{请勿关闭该窗口}$
 
 - `HitDelayFix.dll` 被精心修改过的客户端文件,原始文件为`./MUSYNX_Data/Managed/Assembly-CSharp.dll`.
-- `HitDelayLine.py` 用于读取`./musync_data/HitDelay.log`中的击打信息生成可视化数据表,标题栏提供三个统计信息.
+- `HitDelayLine.py` 用于读取`./musynx_data/HitDelay.log`中的击打信息生成可视化数据表,标题栏提供三个统计信息.
     - `AvgDelay` 平均击打延迟,即所有击打的平均值,能够一定程度上提示游戏延迟应该调整的数值(可能有较大偏差,仅供参考).
     比如游戏内判定补偿是+010ms,AvgDelay数值为-5ms,那么就应将游戏内判定补偿减少5ms,但是具体需要调整多少请多次测试.
     - `AllKeys` 谱面中存在note的数目.
     - `AvgAcc` 平均击打偏差,即所有击打的绝对值的平均值,该值总为正数.
     该值反应了您当前谱面本次游玩击打Key的时机的精准度,该值与您本次游玩的结算成绩有一定的关联:
 
-    该值越小,就说明您击打的越精准,(在该值小于45ms时，您的)分值就会越高.
+    该值越小,就说明您击打的越精准,(在该值小于45ms时,您的)分值就会越高.
 
 ## 更新日志
 <!--
@@ -119,6 +119,15 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 -->
 
 ## 初始化项目(尚未达到可用标准)
+### Version 0.0.5
+1. 添加注释
+2. 对HitDelayHistoryORM添加切换Insert/Update函数
+3. 将全局的`MUSYNC`替换为`MUSYNX`
+4. 将`Functions`分离为DLL文件
+5. 筛选`musynx_data`目录中的文件
+6. 将`HitDelay`页面分离为DLL文件
+7. 将`SQL`封装分离为DLL文件
+8. 将`DifficultyScoreAnalyze`页面分离为DLL文件
 ### Version 0.0.4
 1. 将所有`GBK`编码转换为`UTF-8-BOM`编码
 2. 将所有`UTF-8`编码转换为`UTF-8-BOM`编码
@@ -140,6 +149,6 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 1. 添加获取系统DPI函数
 2. 微调UI
 ### Version 0.0.1
-1. 初始化项目，搭建框架
+1. 初始化项目,搭建框架
 
 ## 声明：妾身`不会`对存档文件进行`写`操作

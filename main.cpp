@@ -1,10 +1,10 @@
-﻿#include "MUSYNCSavDecode.h"
+﻿#include "MUSYNXSavDecode.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MUSYNCSavDecode w;
+    MUSYNXSavDecode w;
     w.show();
     return a.exec();
 }
