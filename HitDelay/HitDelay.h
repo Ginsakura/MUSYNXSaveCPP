@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <hitdelay_global.h>
 #include <QWidget>

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <functions_global.h>
 #include <QString>

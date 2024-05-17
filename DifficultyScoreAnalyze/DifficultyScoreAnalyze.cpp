@@ -1,18 +1,18 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "DifficultyScoreAnalyze.h"
 
 //==================================================================
-//º¯ Êý Ãû£º
-//¹¦ÄÜÃèÊö£º
-//ÊäÈë²ÎÊý£º
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼š
+//åŠŸèƒ½æè¿°ï¼š
+//è¾“å…¥å‚æ•°ï¼š
+//è¿” å›ž å€¼ï¼š
 //==================================================================
 DifficultyScoreAnalyze::DifficultyScoreAnalyze(QWidget* parent)
     : QWidget(parent)
 {
     DSAui.setupUi(this);
-    QLineSeries* lineseries = new QLineSeries();//Í¼±íµÄÊý¾Ý¼¯
-    lineseries->append(0, 5);//appendºÍ<<¹¦ÄÜ²î²»¶à
+    QLineSeries* lineseries = new QLineSeries();//å›¾è¡¨çš„æ•°æ®é›†
+    lineseries->append(0, 5);//appendå’Œ<<åŠŸèƒ½å·®ä¸å¤š
     *lineseries << QPointF(13, 5) << QPointF(17, 6) << QPointF(20, 2);
 
     QChart* chart = new QChart();

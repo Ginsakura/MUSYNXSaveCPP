@@ -128,6 +128,7 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 6. 将`HitDelay`页面分离为DLL文件
 7. 将`SQL`封装分离为DLL文件
 8. 将`DifficultyScoreAnalyze`页面分离为DLL文件
+9. 将所有`GBK`编码转换为`UTF-8-BOM`编码
 ### Version 0.0.4
 1. 将所有`GBK`编码转换为`UTF-8-BOM`编码
 2. 将所有`UTF-8`编码转换为`UTF-8-BOM`编码

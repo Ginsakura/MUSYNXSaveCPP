@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "sql_global.h"
 #include <QString>

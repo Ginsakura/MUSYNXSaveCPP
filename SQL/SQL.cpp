@@ -1,23 +1,23 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "SQL.h"
 #include "Functions.h"
 
 SQLOperat::SQLOperat() {
-	// ¼ÓÔØÇı¶¯
+	// åŠ è½½é©±åŠ¨
 	DB = QSqlDatabase::addDatabase("QSQLITE");
-	// Á¬½ÓÊı¾İ¿â
+	// è¿æ¥æ•°æ®åº“
 	DB.setDatabaseName("HitDelayHistory_v2.db");
-	// ¼ìÑéÊı¾İ¿âÁ¬½Ó
+	// æ£€éªŒæ•°æ®åº“è¿æ¥
 	if (DB.open()) {
-		// ´´½¨ÓÎ±ê²¢Á¬½Óµ½Êı¾İ¿â
+		// åˆ›å»ºæ¸¸æ ‡å¹¶è¿æ¥åˆ°æ•°æ®åº“
 		cursor = QSqlQuery(DB);
 		bool create = false, tableNotExists = true;
-		// ²éÑ¯±í½á¹¹
+		// æŸ¥è¯¢è¡¨ç»“æ„
 		while (Select("sqlite_master", "name", "type='table'").next()) {
 			QString tab = tempCur.value(0).toString();
 			if (tab == "HitDelayHistory") tableNotExists = false;
 		}
-		// ±í²»´æÔÚÊ±´´½¨±í
+		// è¡¨ä¸å­˜åœ¨æ—¶åˆ›å»ºè¡¨
 		if (tableNotExists) {
 			cursor.prepare("CREATE TABLE if not exists \"HitDelayHistory\" ("
 				"\"SongMapName\" text NOT NULL,"
@@ -30,22 +30,22 @@ SQLOperat::SQLOperat() {
 				");");
 			create = cursor.exec();
 			if (create) {
-				qout << QFgColor(0, 0xff, 0) << QString::fromLocal8Bit("HitDelayHistory±í´´½¨³É¹¦»òÒÑ´æÔÚ") << QResetColor();
+				qout << QFgColor(0, 0xff, 0) << QString::fromLocal8Bit("HitDelayHistoryè¡¨åˆ›å»ºæˆåŠŸæˆ–å·²å­˜åœ¨") << QResetColor();
 			}
 			else {
-				qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("HitDelayHistory±í´´½¨Ê§°Ü: ") << QResetColor() << cursor.lastError();
+				qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("HitDelayHistoryè¡¨åˆ›å»ºå¤±è´¥: ") << QResetColor() << cursor.lastError();
 			}
 		}
 	}
-	qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("´ò¿ªÊ§°Ü") << QResetColor();
+	qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("æ‰“å¼€å¤±è´¥") << QResetColor();
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºSelectAll
-//¹¦ÄÜÃèÊö£º´«Èë±íÃû,²éÑ¯±íÄÚ`È«²¿ĞĞ`µÄ`È«²¿×Ö¶Î`
+//å‡½ æ•° åï¼šSelectAll
+//åŠŸèƒ½æè¿°ï¼šä¼ å…¥è¡¨å,æŸ¥è¯¢è¡¨å†…`å…¨éƒ¨è¡Œ`çš„`å…¨éƒ¨å­—æ®µ`
 //          select * from 'table';
-//ÊäÈë²ÎÊı£ºQString table
-//·µ »Ø Öµ£ºQSqlQuery || nullptr
+//è¾“å…¥å‚æ•°ï¼šQString table
+//è¿” å› å€¼ï¼šQSqlQuery || nullptr
 //==================================================================
 QSqlQuery SQLOperat::SelectAll(const QString table) {
 	QSqlQuery cur = QSqlQuery(DB);
@@ -60,11 +60,11 @@ QSqlQuery SQLOperat::SelectAll(const QString table) {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºSelect
-//¹¦ÄÜÃèÊö£ºÍ¨¹ı´«Èë±íÃû¡¢ËÑË÷×Ö¶ÎºÍÌõ¼ş,²éÑ¯`Ö¸¶¨ĞĞ`µÄ`Ö¸¶¨×Ö¶Î`
+//å‡½ æ•° åï¼šSelect
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ä¼ å…¥è¡¨åã€æœç´¢å­—æ®µå’Œæ¡ä»¶,æŸ¥è¯¢`æŒ‡å®šè¡Œ`çš„`æŒ‡å®šå­—æ®µ`
 //          select 'getter' from 'table' where 'condition';
-//ÊäÈë²ÎÊı£ºQString table, QString getter, QString condition
-//·µ »Ø Öµ£ºQSqlQuery || nullptr
+//è¾“å…¥å‚æ•°ï¼šQString table, QString getter, QString condition
+//è¿” å› å€¼ï¼šQSqlQuery || nullptr
 //==================================================================
 QSqlQuery SQLOperat::Select(const QString table, const QString getter, const QString condition) {
 	QSqlQuery cur = QSqlQuery(DB);
@@ -79,11 +79,11 @@ QSqlQuery SQLOperat::Select(const QString table, const QString getter, const QSt
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºSelect
-//¹¦ÄÜÃèÊö£ºÍ¨¹ı´«Èë±íÃû¡¢ËÑË÷×Ö¶Î,²éÑ¯`È«²¿ĞĞ`µÄ`Ö¸¶¨×Ö¶Î`
+//å‡½ æ•° åï¼šSelect
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ä¼ å…¥è¡¨åã€æœç´¢å­—æ®µ,æŸ¥è¯¢`å…¨éƒ¨è¡Œ`çš„`æŒ‡å®šå­—æ®µ`
 //          select 'getter' from 'table';
-//ÊäÈë²ÎÊı£ºQString table, QString getter = "*"
-//·µ »Ø Öµ£ºQSqlQuery || nullptr
+//è¾“å…¥å‚æ•°ï¼šQString table, QString getter = "*"
+//è¿” å› å€¼ï¼šQSqlQuery || nullptr
 //==================================================================
 QSqlQuery SQLOperat::Select(const QString table, const QString getter = "*") {
 	QSqlQuery cur = QSqlQuery(DB);
@@ -98,11 +98,11 @@ QSqlQuery SQLOperat::Select(const QString table, const QString getter = "*") {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºInsert
-//¹¦ÄÜÃèÊö£º´«Èë±íÃû¡¢×Ö¶ÎÃûºÍÖµ,Ïò±íÄÚ²åÈëÖ¸¶¨×Ö¶ÎµÄÊı¾İ
+//å‡½ æ•° åï¼šInsert
+//åŠŸèƒ½æè¿°ï¼šä¼ å…¥è¡¨åã€å­—æ®µåå’Œå€¼,å‘è¡¨å†…æ’å…¥æŒ‡å®šå­—æ®µçš„æ•°æ®
 //          Insert into 'table'('keys') values ('value');
-//ÊäÈë²ÎÊı£ºQString table, QString keys, QString value
-//·µ »Ø Öµ£ºbool,ÊÇ·ñ³É¹¦Ö´ĞĞ
+//è¾“å…¥å‚æ•°ï¼šQString table, QString keys, QString value
+//è¿” å› å€¼ï¼šbool,æ˜¯å¦æˆåŠŸæ‰§è¡Œ
 //==================================================================
 bool SQLOperat::Insert(const QString table, const QString keys, const QString value) {
 	cursor.prepare(QString("Insert into %0(%1) values (%2);").arg(table).arg(keys).arg(value));
@@ -114,11 +114,11 @@ bool SQLOperat::Insert(const QString table, const QString keys, const QString va
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºInsert
-//¹¦ÄÜÃèÊö£º´«Èë±íÃûºÍÖµ,Ïò±íÄÚ²åÈëÒ»ÕûĞĞÊı¾İ
+//å‡½ æ•° åï¼šInsert
+//åŠŸèƒ½æè¿°ï¼šä¼ å…¥è¡¨åå’Œå€¼,å‘è¡¨å†…æ’å…¥ä¸€æ•´è¡Œæ•°æ®
 //          Insert into 'table' values ('value');
-//ÊäÈë²ÎÊı£ºQString table, QString value
-//·µ »Ø Öµ£ºbool,ÊÇ·ñ³É¹¦Ö´ĞĞ
+//è¾“å…¥å‚æ•°ï¼šQString table, QString value
+//è¿” å› å€¼ï¼šbool,æ˜¯å¦æˆåŠŸæ‰§è¡Œ
 //==================================================================
 bool SQLOperat::Insert(const QString table, const QString value) {
 	cursor.prepare(QString("Insert into %0 values (%1)").arg(table).arg(value));
@@ -130,11 +130,11 @@ bool SQLOperat::Insert(const QString table, const QString value) {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºUpdate
-//¹¦ÄÜÃèÊö£ºÍ¨¹ı´«Èë±íÃû¡¢×Ö¶Î¡¢ÖµºÍÌõ¼ş,¸üĞÂÒ»¸ö×Ö¶ÎµÄÖµ
+//å‡½ æ•° åï¼šUpdate
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ä¼ å…¥è¡¨åã€å­—æ®µã€å€¼å’Œæ¡ä»¶,æ›´æ–°ä¸€ä¸ªå­—æ®µçš„å€¼
 //          Update 'table' set 'keys'='value' where 'condition';
-//ÊäÈë²ÎÊı£ºQString table, QString keys, QString value, QString condition
-//·µ »Ø Öµ£ºbool,ÊÇ·ñ³É¹¦Ö´ĞĞ
+//è¾“å…¥å‚æ•°ï¼šQString table, QString keys, QString value, QString condition
+//è¿” å› å€¼ï¼šbool,æ˜¯å¦æˆåŠŸæ‰§è¡Œ
 //==================================================================
 bool SQLOperat::Update(const QString table, const QString keys, const QString value, const QString condition) {
 	//qout << QString("Update %1 set '%2'='%3' where %4").arg(table).arg(keys).arg(value).arg(condition);
@@ -147,11 +147,11 @@ bool SQLOperat::Update(const QString table, const QString keys, const QString va
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºDelete
-//¹¦ÄÜÃèÊö£ºÍ¨¹ı´«Èë±íÃûºÍÌõ¼ş,ÒÔÉ¾³ıÖ¸¶¨µÄÊı¾İĞĞ
+//å‡½ æ•° åï¼šDelete
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ä¼ å…¥è¡¨åå’Œæ¡ä»¶,ä»¥åˆ é™¤æŒ‡å®šçš„æ•°æ®è¡Œ
 //          delete from 'table' where 'condition';
-//ÊäÈë²ÎÊı£ºQString table, QString condition
-//·µ »Ø Öµ£ºbool,ÊÇ·ñ³É¹¦Ö´ĞĞ
+//è¾“å…¥å‚æ•°ï¼šQString table, QString condition
+//è¿” å› å€¼ï¼šbool,æ˜¯å¦æˆåŠŸæ‰§è¡Œ
 //==================================================================
 bool SQLOperat::Delete(QString table, QString condition) {
 	cursor.prepare(QString("delete from %0 where %1").arg(table).arg(condition));
@@ -163,10 +163,10 @@ bool SQLOperat::Delete(QString table, QString condition) {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºClose
-//¹¦ÄÜÃèÊö£º¹Ø±ÕÊı¾İ¿âÁ¬½Ó,²¢Çå¿ÕQuery
-//ÊäÈë²ÎÊı£º
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼šClose
+//åŠŸèƒ½æè¿°ï¼šå…³é—­æ•°æ®åº“è¿æ¥,å¹¶æ¸…ç©ºQuery
+//è¾“å…¥å‚æ•°ï¼š
+//è¿” å› å€¼ï¼š
 //==================================================================
 void SQLOperat::Close() {
 	cursor.clear();
@@ -178,18 +178,18 @@ SQLOperat::~SQLOperat() {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºHitDelayHistory
-//¹¦ÄÜÃèÊö£ºÎŞ²Î¹¹Ôìº¯Êı,´´½¨Ò»¸ö¿ÕµÄHitDelayHistoryORM¶ÔÏó
-//ÊäÈë²ÎÊı£ºQSqlQuery cur
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼šHitDelayHistory
+//åŠŸèƒ½æè¿°ï¼šæ— å‚æ„é€ å‡½æ•°,åˆ›å»ºä¸€ä¸ªç©ºçš„HitDelayHistoryORMå¯¹è±¡
+//è¾“å…¥å‚æ•°ï¼šQSqlQuery cur
+//è¿” å› å€¼ï¼š
 //==================================================================
 HitDelayHistory::HitDelayHistory() {}
 
 //==================================================================
-//º¯ Êı Ãû£ºHitDelayHistory
-//¹¦ÄÜÃèÊö£ºÓĞ²Î¹¹Ôìº¯Êı,Í¨¹ı´«ÈëQuery¶ÔÏóÀ´³õÊ¼»¯HitDelayHistoryORM¶ÔÏóµÄÖµ
-//ÊäÈë²ÎÊı£ºQSqlQuery cur
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼šHitDelayHistory
+//åŠŸèƒ½æè¿°ï¼šæœ‰å‚æ„é€ å‡½æ•°,é€šè¿‡ä¼ å…¥Queryå¯¹è±¡æ¥åˆå§‹åŒ–HitDelayHistoryORMå¯¹è±¡çš„å€¼
+//è¾“å…¥å‚æ•°ï¼šQSqlQuery cur
+//è¿” å› å€¼ï¼š
 //==================================================================
 HitDelayHistory::HitDelayHistory(QSqlQuery cur) {
 	this->SongMapName = cur.value(0).toString();
@@ -202,10 +202,10 @@ HitDelayHistory::HitDelayHistory(QSqlQuery cur) {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºHitDelayHistory
-//¹¦ÄÜÃèÊö£ºÍ¨¹ı´«ÈëÃ¿Ò»¸ö²ÎÊıµÄÖµ,Íê³ÉHitDelayHistoryORM¶ÔÏó³õÊ¼»¯
-//ÊäÈë²ÎÊı£ºQString songMapName, QString recordTime, double avgDelay, int allKeys, double avgAcc, QString hitMap
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼šHitDelayHistory
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ä¼ å…¥æ¯ä¸€ä¸ªå‚æ•°çš„å€¼,å®ŒæˆHitDelayHistoryORMå¯¹è±¡åˆå§‹åŒ–
+//è¾“å…¥å‚æ•°ï¼šQString songMapName, QString recordTime, double avgDelay, int allKeys, double avgAcc, QString hitMap
+//è¿” å› å€¼ï¼š
 //==================================================================
 HitDelayHistory::HitDelayHistory(QString songMapName, QString recordTime,
 	double avgDelay, int allKeys, double avgAcc, QString hitMap) {
@@ -218,10 +218,10 @@ HitDelayHistory::HitDelayHistory(QString songMapName, QString recordTime,
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºsave
-//¹¦ÄÜÃèÊö£ºÍ¨¹ıÀàÄÚË½ÓĞ³ÉÔ±±äÁ¿isInsertÅĞ¶ÏÖ´ĞĞInsert»¹ÊÇUpdate
-//ÊäÈë²ÎÊı£º
-//·µ »Ø Öµ£ºbool,ÊÇ·ñ³É¹¦Ö´ĞĞ
+//å‡½ æ•° åï¼šsave
+//åŠŸèƒ½æè¿°ï¼šé€šè¿‡ç±»å†…ç§æœ‰æˆå‘˜å˜é‡isInsertåˆ¤æ–­æ‰§è¡ŒInsertè¿˜æ˜¯Update
+//è¾“å…¥å‚æ•°ï¼š
+//è¿” å› å€¼ï¼šbool,æ˜¯å¦æˆåŠŸæ‰§è¡Œ
 //==================================================================
 bool HitDelayHistory::save() {
 	if (this->RecordTime == "") {
@@ -243,10 +243,10 @@ bool HitDelayHistory::save() {
 }
 
 //==================================================================
-//º¯ Êı Ãû£ºchange
-//¹¦ÄÜÃèÊö£ºÇĞ»»¸ÃORM¶ÔÏóµÄ²åÈë/¸üĞÂ¹¦ÄÜ
-//ÊäÈë²ÎÊı£º
-//·µ »Ø Öµ£º
+//å‡½ æ•° åï¼šchange
+//åŠŸèƒ½æè¿°ï¼šåˆ‡æ¢è¯¥ORMå¯¹è±¡çš„æ’å…¥/æ›´æ–°åŠŸèƒ½
+//è¾“å…¥å‚æ•°ï¼š
+//è¿” å› å€¼ï¼š
 //==================================================================
 void HitDelayHistory::change() {
 	this->isInsert = !this->isInsert;
