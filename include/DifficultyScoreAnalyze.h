@@ -15,6 +15,12 @@ class DIFFICULTYSCOREANALYZE_EXPORT DifficultyScoreAnalyze : public QWidget
 	Q_OBJECT
 
 public:
+	//==================================================================
+	//函 数 名：
+	//功能描述：
+	//输入参数：
+	//返 回 值：
+	//==================================================================
 	DifficultyScoreAnalyze(QWidget* parent = nullptr);
 	~DifficultyScoreAnalyze();
 
