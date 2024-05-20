@@ -2,6 +2,14 @@
 
 #include <functions_global.h>
 #include <QString>
+#define qout qDebug().noquote().nospace()
+#define FGRED QFgColor(0xff, 0, 0)
+#define FGGREEN QFgColor(0, 0xff, 0)
+#define FGBLUE QFgColor(0, 0, 0xff)
+#define BGRED QBgColor(0xff, 0, 0)
+#define BGGREEN QBgColor(0, 0xff, 0)
+#define BGBLUE QBgColor(0, 0, 0xff)
+#define RESET QResetColor()
 
 // 使用`Disable`和`Enable`代替`false`和`true`
 enum Bool {
@@ -90,8 +98,25 @@ FUNCTIONS_EXPORT QString QResetColor();
 
 class FUNCTIONS_EXPORT Config {
 public:
-	Config() {};
+	Config();
 	~Config() {};
+
+	//==================================================================
+	//函 数 名：LoadConfig
+	//功能描述：读取Config.json文件
+	//输入参数：
+	//返 回 值：state: bool
+	//==================================================================
+	bool load();
+
+	//==================================================================
+	//函 数 名：dump
+	//功能描述：将配置信息写出到配置文件
+	//输入参数：
+	//返 回 值：state: bool
+	//==================================================================
+	bool dump();
+
 	// Acc-Sync图表
 	bool Acc_Sync = Disable;
 	// 启动时版本检查
@@ -142,34 +167,26 @@ FUNCTIONS_EXPORT double GetScreenScale();
 //==================================================================
 //函 数 名：isFileExists
 //功能描述：判断文件是否存在
-//输入参数：name: string
+//输入参数：name: QString
 //返 回 值：isExists: bool
 //==================================================================
-FUNCTIONS_EXPORT bool isFileExists(std::string& name);
+FUNCTIONS_EXPORT bool isFileExists(QString name);
 
 //==================================================================
 //函 数 名：SearchMainExecPath
 //功能描述：(简单)搜索MUSYNX游戏主程序地址
-//输入参数：
-//返 回 值：DPI: double
-//==================================================================
-FUNCTIONS_EXPORT std::string SearchMainExecPath();
-
-//==================================================================
-//函 数 名：LoadConfig
-//功能描述：读取Config.json文件,返回Config对象指针(堆内存)
-//输入参数：
-//返 回 值：config: Config*
-//==================================================================
-FUNCTIONS_EXPORT Config* LoadConfig();
-
-//==================================================================
-//函 数 名：WriteConfig
-//功能描述：将Config对象写出到Config.json文件
 //输入参数：config: Config*
-//返 回 值：state: bool
+//返 回 值：filepath: QString
 //==================================================================
-FUNCTIONS_EXPORT bool WriteConfig(Config* config);
+FUNCTIONS_EXPORT QString SearchMainExecPath(Config* config);
+
+//==================================================================
+//函 数 名：FileMD5
+//功能描述：计算文件MD5值
+//输入参数：filepath: QString
+//返 回 值：md5: QString
+//==================================================================
+FUNCTIONS_EXPORT QString FileMD5(QString name);
 
 //==================================================================
 //函 数 名：ChangeConsoleStyle

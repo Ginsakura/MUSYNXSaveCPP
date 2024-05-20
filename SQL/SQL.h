@@ -7,7 +7,6 @@
 #include <QSqlQuery>
 #include <QList>
 #include <QDebug>
-
 #define qout qDebug().noquote().nospace()
 
 // 对数据库操作的第一层封装

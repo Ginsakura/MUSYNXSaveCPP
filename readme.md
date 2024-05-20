@@ -119,6 +119,14 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 -->
 
 ## 初始化项目(尚未达到可用标准)
+### Version 0.0.8
+1. 修改函数参数类型 `isFileExists(std::string&)` -> `isFileExists(QString)`
+2. 编写函数 `FileMD5()`
+3. 编写函数 `SearchMainExecPath()`
+4. 创建构造函数 `Config::Config()`
+5. 重写函数 `LoadConfig()` -> `Config::load()`
+5. 重写函数 `WriteConfig()` -> `Config::dump()`
+7. 添加默认色彩宏,分别为`FGRED`,`BGRED`,`FGGREEN`,`BGGREEN`,`FGBLUE`,`BGBLUE`,`RESET`
 ### Version 0.0.7
 1. 创建数据库表结构
     #### HitDelayHistory
@@ -133,13 +141,13 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
     | AvgAcc      | real |      |
     | HitMap      | text |      |
 2. 增加数据库连接确认
-修改项目名: `MUSYNXSavDecode` -> `MUSYNXSavDecodeCPP`
-修改数据库名: `HitDelayHistory_v2.db` -> `data.db`
-修改数据库表名: `HitDelayHistory` -> `HitDelayHistory_v3`
-修改`HitDelay.ui`中的表格布局
-把函数注释从实现(.cpp)移动到声明(.h)
-添加配置类用于在程序中存储配置数据
-新增多个工具函数
+1. 修改项目名: `MUSYNXSavDecode` -> `MUSYNXSavDecodeCPP`
+2. 修改数据库名: `HitDelayHistory_v2.db` -> `data.db`
+3. 修改数据库表名: `HitDelayHistory` -> `HitDelayHistory_v3`
+4. 修改`HitDelay.ui`中的表格布局
+5. 把函数注释从实现(.cpp)移动到声明(.h)
+6. 添加配置类用于在程序中存储配置数据
+7. 新增多个工具函数
 ### Version 0.0.6
 1. 删除`stdafx`预编译头
 2. 修改moc目录
