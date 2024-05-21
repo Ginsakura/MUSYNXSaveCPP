@@ -187,6 +187,25 @@ Hit</string>
 	border-width: 2px;
 	border-color: #ADADAD;
 	border-style: groove;
+	border-radius:10px;
+}
+QPushButton:hover {
+	/*鼠标悬浮在按钮上时的样式*/
+	background-color: #FFA4A4;
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #EE7F7F;
+	border-style: groove;
+	border-radius:10px;
+}
+QPushButton:pressed {
+  /*设置点击按钮时的样式*/
+	background-color: #FF5555;
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #EE7F7F;
+	border-style: inset;
+	border-radius:10px;
 }</string>
    </property>
    <property name="text">
@@ -344,6 +363,23 @@ Hit</string>
 	border-width: 2px;
 	border-color: #A6E22B;
 	border-style: groove;
+}
+QPushButton:hover {
+	background-color: #9FFF30;
+	/*鼠标悬浮在按钮上时的样式*/
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #9FFF30;
+	border-style: groove;
+}
+QPushButton:pressed {
+  /*设置点击按钮时的样式*/
+	background-color: #9FFF30;
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #9FFF30;
+	border-style: inset;
+	border-radius:10px;
 }</string>
     </property>
     <property name="text">
@@ -380,6 +416,25 @@ Hit</string>
 	border-color: #FF2020;
 	border-style: groove;
 	color: #FF2020;
+}
+QPushButton:hover {
+	/*鼠标悬浮在按钮上时的样式*/
+	background-color: #FFA4A4;
+	color: #000;
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #FF8520;
+	border-style: groove;
+}
+QPushButton:pressed {
+  /*设置点击按钮时的样式*/
+	background-color: #FF8520;
+	color: #000;
+	font: 14pt &quot;霞鹜文楷等宽&quot;;
+	border-width: 2px;
+	border-color: #FF8520;
+	border-style: inset;
+	border-radius:10px;
 }</string>
     </property>
     <property name="text">

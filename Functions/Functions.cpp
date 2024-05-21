@@ -4,12 +4,10 @@
 #include <format>
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <uiautomation.h>
 #include <Windows.h>
 
 #include <QCryptographicHash>
-#include <QDir>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -123,91 +121,151 @@ QString SearchMainExecPath(Config* config) {
 }
 
 Config::Config() {
-	if (!isFileExists(QDir::homePath() + "/musynx_data/config.json")) {
-
+	this->configDir = QDir(QDir::currentPath());
+	if (!configDir.exists("musynx_data")) {
+		configDir.mkdir("musynx_data");
+		qout << FGREEN << "Create \"musynx_data\" dir" << RESET;
+	}
+	configDir.cd("musynx_data");
+	if (isFileExists(configDir.filePath("config.json"))) {
+		qout << FGREEN << "Config_v2 Exists" << RESET;
+		this->load();
+	}
+	else if (isFileExists(configDir.filePath("ExtraFunction.cfg"))){
+		qout << FGREEN << "Config_v1 Exists" << RESET;
+		std::cout << FORANGE.toStdString() << "Converting config version..." << ResetColor();
+		if (this->FromConfig_v1()) {
+			qout << FGREEN << "Success" << RESET;
+			this->dump();
+		}
+	}
+	else {
+		qout << FORANGE << "Config File not Exists." << RESET;
+		this->dump();
 	}
 }
 
 bool Config::load() {
 	std::cout << "Loading settings...";
-	QDir dir(QDir::currentPath());
-	if (!dir.exists("musynx_data")) {
-		dir.mkdir("musynx_data");
-		qout << FGGREEN << "Create \"musynx_data\" dir" << RESET;
-	}
-	dir.cd("musynx_data");
-	QFile configFile(dir.filePath("config.json"));
+	QFile configFile(configDir.filePath("config.json"));
 	if (!configFile.open(QIODevice::ReadOnly)) {
-		qout << FGRED << "Failure\n   File open error"<< RESET;
+		qout << FRED << "Failure\n   File open error"<< RESET;
 		return false;
 	}
-	if (configFile.size() == 0) {
-		qout << FGBLUE << "Created" << RESET;
-		this->dump();
-		return true;
-	}
+
 	QByteArray configText = configFile.readAll();
 	configFile.close();
 
 	QJsonParseError jsonError;
 	QJsonObject settings = QJsonDocument::fromJson(configText, &jsonError).object();
 
-	this->Acc_Sync					 = settings.value("Acc_Sync"					).toBool();
-	this->AutoCheckUpdate			 = settings.value("AutoCheckUpdate"				).toBool();
-	this->AnalyzeWhenStarting		 = settings.value("AnalyzeWhenStarting"			).toBool();
-	this->DLLInjection				 = settings.value("DLLInjection"				).toBool();
-	this->SystemDPI					 = settings.value("SystemDPI"					).toInt();
-	this->DonutChartinHitDelay		 = settings.value("DonutChartinHitDelay"		).toBool();
-	this->DonutChartinAllHitAnalyze	 = settings.value("DonutChartinAllHitAnalyze"	).toBool();
-	this->PDFofCyanExact			 = settings.value("PDFofCyanExact"				).toBool();
-	this->NarrowDelayInterval		 = settings.value("NarrowDelayInterval"			).toBool();
-	this->ChangeConsoleStyle		 = settings.value("ChangeConsoleStyle"			).toBool();
-	this->ConsoleAlpha				 = settings.value("ConsoleAlpha"				).toInt();
-	this->ConsoleFont				 = settings.value("ConsoleFont"					).toString();
-	this->ConsoleFontSize			 = settings.value("ConsoleFontSize"				).toInt();
-	this->MainExecPath				 = settings.value("MainExecPath"				).toString();
-	this->DefaultKeys				 = settings.value("DefaultKeys"					).toInt();
-	this->DefaultDiffcute			 = settings.value("DefaultDiffcute"				).toInt();
-
-	qout << FGGREEN << "Success" << RESET;
-	return true;
+	// 判断是否出错
+	if (jsonError.error != QJsonParseError::NoError) {
+		qout << FRED << "Error: \n" << jsonError.errorString() << RESET;
+		return false;
+	}
+	else {
+		// 读取settings对象并赋值
+		this->Acc_Sync = settings.value("Acc_Sync").toBool();
+		this->AutoCheckUpdate = settings.value("AutoCheckUpdate").toBool();
+		this->AnalyzeWhenStarting = settings.value("AnalyzeWhenStarting").toBool();
+		this->DLLInjection = settings.value("DLLInjection").toBool();
+		this->SystemDPI = settings.value("SystemDPI").toInt();
+		this->DonutChartinHitDelay = settings.value("DonutChartinHitDelay").toBool();
+		this->DonutChartinAllHitAnalyze = settings.value("DonutChartinAllHitAnalyze").toBool();
+		this->PDFofCyanExact = settings.value("PDFofCyanExact").toBool();
+		this->NarrowDelayInterval = settings.value("NarrowDelayInterval").toBool();
+		this->ChangeConsoleStyle = settings.value("ChangeConsoleStyle").toBool();
+		this->ConsoleAlpha = settings.value("ConsoleAlpha").toInt();
+		this->ConsoleFont = settings.value("ConsoleFont").toString();
+		this->ConsoleFontSize = settings.value("ConsoleFontSize").toInt();
+		this->MainExecPath = settings.value("MainExecPath").toString();
+		this->DefaultKeys = FunctionsEnum::Keys(settings.value("DefaultKeys").toInt());
+		this->DefaultDiffcute = FunctionsEnum::Diffcuty(settings.value("DefaultDiffcute").toInt());
+		this->ConfigVersion = settings.value("ConfigVersion").toInt();
+		qout << FGREEN << "Success" << RESET;
+		return true;
+	}
 }
 
 bool Config::dump() {
 	std::cout << "Dumping settings...";
-	QDir dir(QDir::currentPath() + "/musynx_data/");
-	QFile configFile(dir.filePath("config.json"));
-	QFile configFile(QDir::homePath() + "/musynx_data/config.json");
+	QFile configFile(configDir.filePath("config.json"));
 	if (!configFile.open(QIODevice::WriteOnly)) {
-		qout << FGRED << "Failure\n   File open error" << RESET;
+		qout << FRED << "Failure\n   File open error" << RESET;
 		return false;
 	}
-	QJsonParseError jsonError;
 	// 创建Json Object
 	QJsonObject settings;
-	settings.insert("Acc_Sync",						this->Acc_Sync					);
-	settings.insert("AutoCheckUpdate",				this->AutoCheckUpdate			);
-	settings.insert("AnalyzeWhenStarting",			this->AnalyzeWhenStarting		);
-	settings.insert("DLLInjection",					this->DLLInjection				);
-	settings.insert("SystemDPI",					this->SystemDPI					);
-	settings.insert("DonutChartinHitDelay",			this->DonutChartinHitDelay		);
-	settings.insert("DonutChartinAllHitAnalyze",	this->DonutChartinAllHitAnalyze	);
-	settings.insert("PDFofCyanExact",				this->PDFofCyanExact			);
-	settings.insert("NarrowDelayInterval",			this->NarrowDelayInterval		);
-	settings.insert("ChangeConsoleStyle",			this->ChangeConsoleStyle		);
-	settings.insert("ConsoleAlpha",					this->ConsoleAlpha				);
-	settings.insert("ConsoleFont",					this->ConsoleFont				);
-	settings.insert("ConsoleFontSize",				this->ConsoleFontSize			);
-	settings.insert("MainExecPath",					this->MainExecPath				);
-	settings.insert("DefaultKeys",					this->DefaultKeys				);
-	settings.insert("DefaultDiffcute",				this->DefaultDiffcute			);
+	// 填入数据
+	settings.insert("Acc_Sync", this->Acc_Sync);
+	settings.insert("AutoCheckUpdate", this->AutoCheckUpdate);
+	settings.insert("AnalyzeWhenStarting", this->AnalyzeWhenStarting);
+	settings.insert("DLLInjection", this->DLLInjection);
+	settings.insert("SystemDPI", this->SystemDPI);
+	settings.insert("DonutChartinHitDelay", this->DonutChartinHitDelay);
+	settings.insert("DonutChartinAllHitAnalyze", this->DonutChartinAllHitAnalyze);
+	settings.insert("PDFofCyanExact", this->PDFofCyanExact);
+	settings.insert("NarrowDelayInterval", this->NarrowDelayInterval);
+	settings.insert("ChangeConsoleStyle", this->ChangeConsoleStyle);
+	settings.insert("ConsoleAlpha", this->ConsoleAlpha);
+	settings.insert("ConsoleFont", this->ConsoleFont);
+	settings.insert("ConsoleFontSize", this->ConsoleFontSize);
+	settings.insert("MainExecPath", this->MainExecPath);
+	settings.insert("DefaultKeys", this->DefaultKeys);
+	settings.insert("DefaultDiffcute", this->DefaultDiffcute);
+	settings.insert("ConfigVersion", this->ConfigVersion);
 
+	// 创建JsonDocument并添加settings对象
 	QJsonDocument document;
 	document.setObject(settings);
+	// 写出文件
 	configFile.write(document.toJson());
 	configFile.close();
-	qout << FGGREEN << "Success" << RESET;
+	qout << FGREEN << "Success" << RESET;
 	return true;
+}
+
+bool Config::FromConfig_v1() {
+	QFile configFile(configDir.filePath("ExtraFunction.cfg"));
+	if (!configFile.open(QIODevice::WriteOnly)) {
+		qout << FRED << "Failure\n   File open error" << RESET;
+		return false;
+	}
+
+	QByteArray configText = configFile.readAll();
+	configFile.close();
+
+	QJsonParseError jsonError;
+	QJsonObject settings = QJsonDocument::fromJson(configText, &jsonError).object();
+
+	// 判断是否出错
+	if (jsonError.error != QJsonParseError::NoError) {
+		qout << FRED << "Error: \n" << jsonError.errorString() << RESET;
+		return false;
+	}
+	else {
+		// 读取settings对象并赋值
+		this->Acc_Sync = settings.value("EnableAcc-Sync").toBool();
+		this->AutoCheckUpdate = !(settings.value("DisableCheckUpdate").toBool());
+		this->AnalyzeWhenStarting = settings.value("EnableAnalyzeWhenStarting").toBool();
+		this->DLLInjection = settings.value("EnableDLLInjection").toBool();
+		this->SystemDPI = settings.value("SystemDPI").toInt();
+		this->DonutChartinHitDelay = settings.value("EnableDonutChartinHitDelay").toBool();
+		this->DonutChartinAllHitAnalyze = settings.value("EnableDonutChartinAllHitAnalyze").toBool();
+		this->PDFofCyanExact = settings.value("EnablePDFofCyanExact").toBool();
+		this->NarrowDelayInterval = settings.value("EnableNarrowDelayInterval").toBool();
+		this->ChangeConsoleStyle = settings.value("ChangeConsoleStyle").toBool();
+		this->ConsoleAlpha = settings.value("ConsoleAlpha").toInt();
+		this->ConsoleFont = settings.value("ConsoleFont").toString();
+		this->ConsoleFontSize = settings.value("ConsoleFontSize").toInt();
+		this->MainExecPath = settings.value("MainExecPath").toString();
+		this->DefaultKeys = FunctionsEnum::Keys(settings.value("DefaultKeys").toInt());
+		this->DefaultDiffcute = FunctionsEnum::Diffcuty(settings.value("DefaultDiffcute").toInt());
+		this->ConfigVersion = 2;
+		qout << FGREEN << "Success" << RESET;
+		return true;
+	}
 }
 
 void ChangeConsoleStyle(Config* config) {

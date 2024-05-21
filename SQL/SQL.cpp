@@ -1,7 +1,9 @@
 ﻿#include "SQL.h"
-#include "Functions.h"
+#include "../Functions/Functions.h"
+#include <iostream>
 
 SQLOperat::SQLOperat() {
+	this->CheckOldSQLite();
 	// 检查数据库连接是否已经创建过
 	if (QSqlDatabase::contains("SQLiteLink"))
 	{
@@ -12,7 +14,7 @@ SQLOperat::SQLOperat() {
 		// 加载驱动
 		DB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink");
 		// 连接数据库
-		DB.setDatabaseName("data.db");
+		DB.setDatabaseName("HitDelayHistory_v3.db");
 	}
 	// 检验数据库连接
 	if (DB.open()) {
@@ -30,7 +32,7 @@ SQLOperat::SQLOperat() {
 		}
 		// 表不存在时创建表
 		if (tablesNotExists) {
-			cursor.prepare("CREATE TABLE if not exists \"HitDelayHistory_v3\" ("
+			cursor.prepare("CREATE TABLE if not exists \"HitDelayHistory\" ("
 				"\"SongMapName\" text not null,"
 				"\"Keys\" int not null,"
 				"\"Diffcuty\" text not null,"
@@ -43,14 +45,77 @@ SQLOperat::SQLOperat() {
 				");");
 			createResult = cursor.exec();
 			if (createResult) {
-				qout << QFgColor(0, 0xff, 0) << QString::fromLocal8Bit("HitDelayHistory_v3表创建成功或已存在") << QResetColor();
+				qout << FGREEN << QString::fromLocal8Bit("HitDelayHistory_v3表创建成功或已存在") << RESET;
 			}
 			else {
-				qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("HitDelayHistory_v3表创建失败: ") << QResetColor() << cursor.lastError();
+				qout << FRED << QString::fromLocal8Bit("HitDelayHistory_v3表创建失败: ") << RESET << cursor.lastError();
 			}
 		}
 	}
-	qout << QFgColor(0xff, 0, 0) << QString::fromLocal8Bit("打开失败") << QResetColor();
+	qout << FRED << QString::fromLocal8Bit("打开失败") << RESET;
+}
+
+bool SQLOperat::CheckOldSQLite() {
+	if (!isFileExists(QDir::currentPath() + "/musynx_data/HitDelayHistory_v3.db")) {
+		qout << FRED << "Database versions 3 not Exists" << RESET;
+		if (isFileExists(QDir::currentPath() + "/musynx_data/HitDelayHistory_v2.db")) {
+			qout << BYELLOW << "Database versions 2 Exists." << RESET;
+			std::cout << FORANGE.toStdString() << "Transing database version..." << ResetColor();
+			this->FromSql_v2();
+			return true;
+		}
+		else if (isFileExists(QDir::currentPath() + "/musynx_data/HitDelayHistory.db")) {
+			qout << BYELLOW << "Database versions 1 Exists." << RESET;
+			std::cout << FORANGE.toStdString() << "Transing database version..." << ResetColor();
+			this->FromSql_v1();
+			return true;
+		}
+		else {
+			qout << FRED << "All database versions does not exist" << RESET;
+		}
+	}
+	return false;
+}
+
+void SQLOperat::FromSql_v1() {
+	QSqlDatabase oldDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink_v1");
+	oldDB.setDatabaseName("HitDelayHistory.db");
+	QSqlDatabase newDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink");
+	newDB.setDatabaseName("HitDelayHistory_v3.db");
+	QSqlQuery oldcur;
+	if (oldDB.open()) {
+		oldcur = QSqlQuery(oldDB);
+		bool createResult = false;
+		QSqlQuery tmpcur = Select("sqlite_master", "name", "type='table'");
+		tmpcur.next();
+		if (tmpcur.value(0).toString() != "HitDelayHistory") {
+		}
+	}
+	if (newDB.open()) {
+		cursor = QSqlQuery(newDB);
+	}
+	qout << FGREEN << "Success" << RESET;
+	qout << FRED << "Failure" << RESET;
+}
+void SQLOperat::FromSql_v2() {
+	QSqlDatabase oldDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink_v2");
+	oldDB.setDatabaseName("HitDelayHistory_v2.db");
+	QSqlDatabase newDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink");
+	newDB.setDatabaseName("HitDelayHistory_v3.db");
+	QSqlQuery oldcur;
+	if (oldDB.open()) {
+		oldcur = QSqlQuery(oldDB);
+		bool createResult = false;
+		QSqlQuery tmpcur = Select("sqlite_master", "name", "type='table'");
+		tmpcur.next();
+		if (tmpcur.value(0).toString() != "HitDelayHistory") {
+		}
+	}
+	if (newDB.open()) {
+		cursor = QSqlQuery(newDB);
+	}
+	qout << FGREEN << "Success" << RESET;
+	qout << FRED << "Failure" << RESET;
 }
 
 QSqlQuery SQLOperat::SelectAll(const QString table) {
@@ -61,7 +126,8 @@ QSqlQuery SQLOperat::SelectAll(const QString table) {
 		return cur;
 	}
 	else {
-		qout << QFgColor(0xff, 0, 0) << "select error: " << QResetColor() << cur.lastError();
+		qout << FRED << "select error: " << RESET << cur.lastError();
+		return;
 	}
 }
 
@@ -73,7 +139,8 @@ QSqlQuery SQLOperat::Select(const QString table, const QString getter, const QSt
 		return cur;
 	}
 	else {
-		qout << QFgColor(0xff, 0, 0) << "select error: " << QResetColor() << cur.lastError();
+		qout << FRED << "select error: " << RESET << cur.lastError();
+		return;
 	}
 }
 
@@ -85,7 +152,8 @@ QSqlQuery SQLOperat::Select(const QString table, const QString getter = "*") {
 		return cur;
 	}
 	else {
-		qout << QFgColor(0xff, 0, 0) << "select error: " << QResetColor() << cur.lastError();
+		qout << FRED << "select error: " << RESET << cur.lastError();
+		return;
 	}
 }
 
@@ -93,7 +161,7 @@ bool SQLOperat::Insert(const QString table, const QString keys, const QString va
 	cursor.prepare(QString("Insert into %0(%1) values (%2);").arg(table).arg(keys).arg(value));
 	bool state = cursor.exec();
 	if (!state) {
-		qout << QFgColor(0xff, 0, 0) << "Insert to " << table << " error: " << QResetColor() << cursor.lastError();
+		qout << FRED << "Insert to " << table << " error: " << RESET << cursor.lastError();
 	}
 	return state;
 }
@@ -102,7 +170,7 @@ bool SQLOperat::Insert(const QString table, const QString value) {
 	cursor.prepare(QString("Insert into %0 values (%1)").arg(table).arg(value));
 	bool state = cursor.exec();
 	if (!state) {
-		qout << QFgColor(0xff, 0, 0) << "Insert to" << table << " error: " << QResetColor() << cursor.lastError();
+		qout << FRED << "Insert to" << table << " error: " << RESET << cursor.lastError();
 	}
 	return state;
 }
@@ -112,7 +180,7 @@ bool SQLOperat::Update(const QString table, const QString keys, const QString va
 	cursor.prepare(QString("Update %0 set '%1'='%2' where %3").arg(table).arg(keys).arg(value).arg(condition));
 	bool state = cursor.exec();
 	if (!state) {
-		qout << QFgColor(0xff, 0, 0) << "Update to " << table << " error: " << QResetColor() << cursor.lastError();
+		qout << FRED << "Update to " << table << " error: " << RESET << cursor.lastError();
 	}
 	return state;
 }
@@ -121,7 +189,7 @@ bool SQLOperat::Delete(QString table, QString condition) {
 	cursor.prepare(QString("delete from %0 where %1").arg(table).arg(condition));
 	bool state = cursor.exec();
 	if (!state) {
-		qout << QFgColor(0xff, 0, 0) << "Update to " << table << " error: " << QResetColor() << cursor.lastError();
+		qout << FRED << "Update to " << table << " error: " << RESET << cursor.lastError();
 	}
 	return state;
 }
@@ -159,7 +227,7 @@ HitDelayHistory::HitDelayHistory(QString songMapName, QString recordTime,
 
 bool HitDelayHistory::save() {
 	if (this->RecordTime == "") {
-		qout << QFgColor(0xff, 0, 0) << "Record is Null." << QResetColor();
+		qout << FRED << "Record is Null." << RESET;
 		return false;
 	}
 	if (isInsert) {

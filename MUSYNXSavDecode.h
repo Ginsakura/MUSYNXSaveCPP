@@ -5,8 +5,9 @@
 #include <QDesktopServices>
 #include <QMainWindow>
 #include <QUrl>
-#include "HitDelay.h"
-#include "DifficultyScoreAnalyze.h"
+#include "../DifficultyScoreAnalyze/DifficultyScoreAnalyze.h"
+#include "../Functions/Functions.h"
+#include "../HitDelay/HitDelay.h"
 #include "ui_MUSYNXSavDecode.h"
 
 #define qout qDebug().noquote().nospace()
@@ -14,6 +15,7 @@
 // 前向声明
 class HitDelay;
 class DifficultyScoreAnalyze;
+class Config;
 
 typedef enum Filter {
     NoFilter = 0,
@@ -83,6 +85,7 @@ private:
     SongsFilter songsFilter = AllSongs;
     KeysFilter keysFilter = AllKeys;
     DiffcuteFilter diffcuteFilter = AllDiff;
+    Config* config = new Config();
 
     const bool isPreRelease = true;
     const QString version = "0.0.6";

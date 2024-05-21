@@ -1,25 +1,39 @@
 ﻿#pragma once
 
-#include <functions_global.h>
+#include "functions_global.h"
+#include <string>
+#include <QDir>
 #include <QString>
+
 #define qout qDebug().noquote().nospace()
-#define FGRED QFgColor(0xff, 0, 0)
-#define FGGREEN QFgColor(0, 0xff, 0)
-#define FGBLUE QFgColor(0, 0, 0xff)
-#define BGRED QBgColor(0xff, 0, 0)
-#define BGGREEN QBgColor(0, 0xff, 0)
-#define BGBLUE QBgColor(0, 0, 0xff)
-#define RESET QResetColor()
+
+#define FRED	QFgColor(0xff,	0x00,	0x00)
+#define FORANGE	QFgColor(0xff,	0x7f,	0x00)
+#define FYELLOW	QFgColor(0xff,	0xff,	0x00)
+#define FGREEN	QFgColor(0x00,	0xff,	0x00)
+#define FCYAN	QFgColor(0x00,	0xff,	0xff)
+#define FBLUE	QFgColor(0x00,	0x00,	0xff)
+#define FPURPLE	QFgColor(0x7f,	0x00,	0xff)
+
+#define BRED	QBgColor(0xff,	0x00,	0x00)
+#define BORANGE	QBgColor(0xff,	0x7f,	0x00)
+#define BYELLOW	QBgColor(0xff,	0xff,	0x00)
+#define BGREEN	QBgColor(0x00,	0xff,	0x00)
+#define BCYAN	QBgColor(0x00,	0xff,	0xff)
+#define BBLUE	QBgColor(0x00,	0x00,	0xff)
+#define BPURPLE	QBgColor(0x7f,	0x00,	0xff)
+#define RESET	QResetColor()
 
 // 使用`Disable`和`Enable`代替`false`和`true`
 enum Bool {
 	Disable = false,
 	Enable = true
 };
-
-// 使用枚举类型代替字符串
-enum Keys { Keys4, Keys6 };
-enum DiffcutyString { Easy, Hard, Inferno };
+namespace FunctionsEnum {
+	// 使用枚举类型代替字符串
+	enum Keys { Keys4, Keys6 };
+	enum Diffcuty { Easy, Hard, Inferno };
+}
 
 
 static bool isRandomInit = false;
@@ -148,12 +162,22 @@ public:
 	// 喵赛克游戏本体主程序所在的路径
 	QString MainExecPath = "";
 	// '高级功能'中默认'键数'参数
-	int DefaultKeys = Keys4;
+	enum FunctionsEnum::Keys DefaultKeys = FunctionsEnum::Keys4;
 	// '高级功能'中默认'难度'参数
-	int DefaultDiffcute = Easy;
+	enum FunctionsEnum::Diffcuty DefaultDiffcute = FunctionsEnum::Easy;
 private:
 	// 配置文件版本
 	int ConfigVersion = 2;
+	// 配置文件路径
+	QDir configDir;
+
+	//==================================================================
+	//函 数 名：FromConfig_v1
+	//功能描述：读取version 1的配置文件,并转换为version 2
+	//输入参数：
+	//返 回 值：state: bool
+	//==================================================================
+	bool FromConfig_v1();
 };
 
 //==================================================================

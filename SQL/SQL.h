@@ -7,7 +7,6 @@
 #include <QSqlQuery>
 #include <QList>
 #include <QDebug>
-#define qout qDebug().noquote().nospace()
 
 // 对数据库操作的第一层封装
 class SQL_EXPORT SQLOperat {
@@ -90,6 +89,30 @@ private:
 	QSqlDatabase DB;
 	QSqlQuery cursor;
 	QSqlQuery tempCur;
+
+	//==================================================================
+	//函 数 名：CheckOldSQLite
+	//功能描述：检查转换旧版数据库
+	//输入参数：
+	//返 回 值：bool
+	//==================================================================
+	bool CheckOldSQLite();
+
+	//==================================================================
+	//函 数 名：FromSql_v1
+	//功能描述：从version 1数据库转换到version 3
+	//输入参数：
+	//返 回 值：
+	//==================================================================
+	void FromSql_v1();
+
+	//==================================================================
+	//函 数 名：FromSql_v2
+	//功能描述：从version 2数据库转换到version 3
+	//输入参数：
+	//返 回 值：bool
+	//==================================================================
+	void FromSql_v2();
 };
 
 // 对`HitDelayHistory`进行ORM二次封装

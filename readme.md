@@ -119,6 +119,21 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 -->
 
 ## 初始化项目(尚未达到可用标准)
+### Version 0.0.9
+1. 修改`Config::load()`和`Config::dump()`中的字段
+2. 重写色彩宏: `FRED`、`FORANGE`、`FYELLOW`、`FGREEN`、`FCYAN`、`FBLUE`、`FPURPLE`, </br>
+    `BRED`、`BORANGE`、`BYELLOW`、`BGREEN`、`BCYAN`、`BBLUE`、`BPURPLE`, </br>
+    `RESET`
+5. 调整头文件引用
+6. 应用色彩宏
+7. 完成`Config::Conifg`构造函数
+8. 将`Config::load()`和`Config::dump()`中的文件校验移动到构造函数中
+9. 将`Config::DefaultKeys`和`Config::DefaultDiffcute`设置为枚举类型
+10. 完成`Config::FromConfig_v1()`函数
+11. 将`Functions`中的枚举添加`FunctionsEnum`命名空间
+12. 添加`HitDelay`中的按钮样式
+13. 添加`SQL::CheckOldSQLite()`、`SQL::FromSql_v2()`(未完成)、`SQL::FromSql_v1()`(未完成)
+14. delete `include` folder
 ### Version 0.0.8
 1. 修改函数参数类型 `isFileExists(std::string&)` -> `isFileExists(QString)`
 2. 编写函数 `FileMD5()`

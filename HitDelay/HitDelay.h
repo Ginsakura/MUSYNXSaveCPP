@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <hitdelay_global.h>
+#include "hitdelay_global.h"
 #include <QWidget>
 #include "ui_HitDelay.h"
 

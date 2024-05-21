@@ -60,7 +60,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>F:\Files\Project_File\Program_Project\CPP\MUSYNXSavDecode\include;E:\Qt\5.15.2\msvc2019_64\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Qt\5.15.2\msvc2019_64\include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>E:\Qt\5.15.2\msvc2019_64\lib;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
@@ -122,8 +122,6 @@
     </QtMoc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\SQL.h" />
-    <ClInclude Include="..\include\sql_global.h" />
     <ClInclude Include="hitdelay_global.h" />
     <QtMoc Include="HitDelay.h" />
     <ClCompile Include="HitDelay.cpp" />

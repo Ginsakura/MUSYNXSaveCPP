@@ -227,14 +227,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\DifficultyScoreAnalyze.h" />
-    <ClInclude Include="include\difficultyscoreanalyze_global.h" />
-    <ClInclude Include="include\Functions.h" />
-    <ClInclude Include="include\functions_global.h" />
-    <QtMoc Include="include\HitDelay.h" />
-    <ClInclude Include="include\hitdelay_global.h" />
-    <ClInclude Include="include\SQL.h" />
-    <ClInclude Include="include\sql_global.h" />
+    <QtMoc Include="DifficultyScoreAnalyze\DifficultyScoreAnalyze.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DifficultyScoreAnalyze\difficultyscoreanalyze_global.h" />
+    <ClInclude Include="Functions\Functions.h" />
+    <ClInclude Include="Functions\functions_global.h" />
+    <ClInclude Include="HitDelay\hitdelay_global.h" />
+    <ClInclude Include="SQL\SQL.h" />
+    <ClInclude Include="SQL\sql_global.h" />
+    <QtMoc Include="HitDelay\HitDelay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

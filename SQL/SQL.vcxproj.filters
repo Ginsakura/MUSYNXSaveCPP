@@ -32,10 +32,10 @@
     <ClInclude Include="SQL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Functions.h">
+    <ClInclude Include="..\Functions\Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\functions_global.h">
+    <ClInclude Include="..\Functions\functions_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
