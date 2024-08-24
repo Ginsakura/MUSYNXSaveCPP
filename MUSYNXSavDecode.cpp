@@ -18,10 +18,8 @@ MUSYNXSavDecode::MUSYNXSavDecode(QWidget *parent)
 }
 
 //==================================================================
-//函 数 名：
-//功能描述：
-//输入参数：
-//返 回 值：
+//函 数 名：信号槽函数: on_openRepoBtn_clicked
+//功能描述：打开GitHub仓库地址
 //==================================================================
 void MUSYNXSavDecode::on_openRepoBtn_clicked() {
     QDesktopServices::openUrl(QUrl("https://github.com/Ginsakura/MUSYNXSaveCPP"));
@@ -189,10 +187,8 @@ void MUSYNXSavDecode::on_hitDelayBtn_clicked() {
 }
 
 //==================================================================
-//函 数 名：
-//功能描述：
-//输入参数：
-//返 回 值：
+//函 数 名：信号槽函数: on_difficultyScoreAnalyzeBtn_clicked
+//功能描述：打开`DifficultyScoreAnalyze`窗口
 //==================================================================
 void MUSYNXSavDecode::on_difficultyScoreAnalyzeBtn_clicked() {
     DifficultyScoreAnalyze* diffSAWindow = new DifficultyScoreAnalyze;

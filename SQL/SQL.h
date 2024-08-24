@@ -110,9 +110,17 @@ private:
 	//函 数 名：FromSql_v2
 	//功能描述：从version 2数据库转换到version 3
 	//输入参数：
-	//返 回 值：bool
+	//返 回 值：
 	//==================================================================
 	void FromSql_v2();
+
+	//==================================================================
+	//函 数 名：CreateTable
+	//功能描述：创建数据表结构
+	//输入参数：
+	//返 回 值：
+	//==================================================================
+	void CreateTable();
 };
 
 // 对`HitDelayHistory`进行ORM二次封装
@@ -132,14 +140,25 @@ public:
 
 	//==================================================================
 	//函 数 名：HitDelayHistory
-	//功能描述：通过传入每一个参数的值,完成HitDelayHistoryORM对象初始化
-	//输入参数：QString songMapName, QString recordTime, double avgDelay, int allKeys, double avgAcc, QString hitMap
+	//功能描述：有参构造函数,通过传入Query对象来初始化HitDelayHistoryORM对象的值并手动传入是否插入
+	//输入参数：QSqlQuery cur, bool insert
 	//返 回 值：
 	//==================================================================
-	HitDelayHistory(QString, QString, double, int, double, QString);
+	HitDelayHistory(QSqlQuery cur, bool insert);
+
+	//==================================================================
+	//函 数 名：HitDelayHistory
+	//功能描述：通过传入每一个参数的值,完成HitDelayHistoryORM对象初始化
+	//输入参数：QString songMapName, QString recordTime, QString Keys, QString Diffcuty,
+	//	double avgDelay, int allKeys, double avgAcc, QString hitMap
+	//返 回 值：
+	//==================================================================
+	HitDelayHistory(QString, QString, QString, QString, double, int, double, QString);
 
 	QString SongMapName = "";
 	QString RecordTime = "";
+	QString Keys = "4K";
+	QString Diffcuty = "EZ";
 	double AvgDelay = 0;
 	int AllKeys = 0;
 	double AvgAcc = 0;

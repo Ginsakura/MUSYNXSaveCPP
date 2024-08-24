@@ -119,6 +119,8 @@ HitDelay模块用法:启用DLL注入后,在本次游戏进行首次谱面游玩�
 -->
 
 ## 初始化项目(尚未达到可用标准)
+### Version 0.1.0
+创建`SQL::CreateTable()`函数
 ### Version 0.0.9
 1. 修改`Config::load()`和`Config::dump()`中的字段
 2. 重写色彩宏: `FRED`、`FORANGE`、`FYELLOW`、`FGREEN`、`FCYAN`、`FBLUE`、`FPURPLE`, </br>

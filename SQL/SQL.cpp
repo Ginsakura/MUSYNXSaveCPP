@@ -20,36 +20,12 @@ SQLOperat::SQLOperat() {
 	if (DB.open()) {
 		// 创建游标并连接到数据库
 		cursor = QSqlQuery(DB);
-		// 表创建结果状态
-		bool createResult = false;
-		// 表存在状态
-		bool tablesNotExists = true;
 		// 查询表结构
 		tempCur = Select("sqlite_master", "name", "type='table'");
-		while (tempCur.next()) {
-			QString tab = tempCur.value(0).toString();
-			if (tab == "HitDelayHistory") tablesNotExists = false;
-		}
+		tempCur.next();
 		// 表不存在时创建表
-		if (tablesNotExists) {
-			cursor.prepare("CREATE TABLE if not exists \"HitDelayHistory\" ("
-				"\"SongMapName\" text not null,"
-				"\"Keys\" int not null,"
-				"\"Diffcuty\" text not null,"
-				"\"RecordTime\" text,"
-				"\"AvgDelay\" float,"
-				"\"AllKeys\" int,"
-				"\"AvgAcc\" float,"
-				"\"HitMap\" text,"
-				"PRIMARY KEY(\"SongMapName\", \"RecordTime\")"
-				");");
-			createResult = cursor.exec();
-			if (createResult) {
-				qout << FGREEN << QString::fromLocal8Bit("HitDelayHistory_v3表创建成功或已存在") << RESET;
-			}
-			else {
-				qout << FRED << QString::fromLocal8Bit("HitDelayHistory_v3表创建失败: ") << RESET << cursor.lastError();
-			}
+		if (tempCur.value(0).toString() != "HitDelayHistory") {
+			this->CreateTable();
 		}
 	}
 	qout << FRED << QString::fromLocal8Bit("打开失败") << RESET;
@@ -98,10 +74,11 @@ void SQLOperat::FromSql_v1() {
 	qout << FRED << "Failure" << RESET;
 }
 void SQLOperat::FromSql_v2() {
+	std::cout << "Converting database...";
 	QSqlDatabase oldDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink_v2");
 	oldDB.setDatabaseName("HitDelayHistory_v2.db");
-	QSqlDatabase newDB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink");
-	newDB.setDatabaseName("HitDelayHistory_v3.db");
+	DB = QSqlDatabase::addDatabase("QSQLITE", "SQLiteLink");
+	DB.setDatabaseName("HitDelayHistory_v3.db");
 	QSqlQuery oldcur;
 	if (oldDB.open()) {
 		oldcur = QSqlQuery(oldDB);
@@ -109,50 +86,80 @@ void SQLOperat::FromSql_v2() {
 		QSqlQuery tmpcur = Select("sqlite_master", "name", "type='table'");
 		tmpcur.next();
 		if (tmpcur.value(0).toString() != "HitDelayHistory") {
+			qout << FRED << "Failure" << RESET;
+			return;
 		}
 	}
-	if (newDB.open()) {
-		cursor = QSqlQuery(newDB);
+	else qout << FRED << "Failure" << RESET;
+	if (DB.open()) cursor = QSqlQuery(DB);
+	else qout << FRED << "Failure" << RESET;
+	this->CreateTable();
+	oldcur = SelectAll("HitDelayHistory");
+	while (oldcur.next()) {
+		QString sql = QString("insert into HitDelayHistory values ('%0','%1', ' ', ' ', %2, %3, %4, '%5')").arg(oldcur.value(0).toString()).arg(oldcur.value(0).toString()).arg(oldcur.value(2).toDouble()).arg(oldcur.value(3).toInt()).arg(oldcur.value(4).toDouble()).arg(oldcur.value(5).toString());
+		cursor.prepare(sql);
+		if (cursor.exec()) {
+			qout << FGREEN << QString::fromLocal8Bit("insert data: ") << RESET << oldcur.value(0).toString() << " | " << oldcur.value(0).toString();
+		}
+		else {
+			qout << FRED << QString::fromLocal8Bit("not insert data: ") << RESET << oldcur.value(0).toString() << " | " << oldcur.value(0).toString() << "\n" << cursor.lastError();
+		}
 	}
 	qout << FGREEN << "Success" << RESET;
-	qout << FRED << "Failure" << RESET;
+}
+
+void SQLOperat::CreateTable() {
+	cursor.prepare("CREATE TABLE if not exists \"HitDelayHistory\" ("
+		"\"SongMapName\" text not null,"
+		"\"Keys\" text not null,"
+		"\"Diffcuty\" text not null,"
+		"\"RecordTime\" text,"
+		"\"AvgDelay\" float,"
+		"\"AllKeys\" int,"
+		"\"AvgAcc\" float,"
+		"\"HitMap\" text,"
+		"PRIMARY KEY(\"SongMapName\", \"RecordTime\")"
+		");");
+	if (cursor.exec()) {
+		qout << FGREEN << QString::fromLocal8Bit("HitDelayHistory_v3表创建成功或已存在") << RESET;
+	}
+	else {
+		qout << FRED << QString::fromLocal8Bit("HitDelayHistory_v3表创建失败: ") << RESET << cursor.lastError();
+	}
 }
 
 QSqlQuery SQLOperat::SelectAll(const QString table) {
-	QSqlQuery cur = QSqlQuery(DB);
-	cur.prepare(QString("SELECT * from %0").arg(table));
-	bool state = cur.exec();
+	cursor.prepare(QString("SELECT * from %0").arg(table));
+	bool state = cursor.exec();
 	if (state) {
-		return cur;
+		return cursor;
 	}
 	else {
-		qout << FRED << "select error: " << RESET << cur.lastError();
+		qout << FRED << "select error: " << RESET << cursor.lastError();
 		return;
 	}
 }
 
 QSqlQuery SQLOperat::Select(const QString table, const QString getter, const QString condition) {
-	QSqlQuery cur = QSqlQuery(DB);
-	cur.prepare(QString("select %0 from %1 where %2").arg(getter).arg(table).arg(condition));
-	bool state = cur.exec();
+	cursor.prepare(QString("select %0 from %1 where %2").arg(getter).arg(table).arg(condition));
+	bool state = cursor.exec();
 	if (state) {
-		return cur;
+		return cursor;
 	}
 	else {
-		qout << FRED << "select error: " << RESET << cur.lastError();
+		qout << FRED << "select error: " << RESET << cursor.lastError();
 		return;
 	}
 }
 
 QSqlQuery SQLOperat::Select(const QString table, const QString getter = "*") {
-	QSqlQuery cur = QSqlQuery(DB);
 	cursor.prepare(QString("select %0 from %1").arg(getter).arg(table));
 	bool state = cursor.exec();
 	if (state) {
-		return cur;
+		return cursor;
 	}
 	else {
-		qout << FRED << "select error: " << RESET << cur.lastError();
+		qout << FRED << "select error: " << RESET << cursor.lastError();
 		return;
 	}
 }
@@ -208,17 +215,33 @@ HitDelayHistory::HitDelayHistory() {}
 HitDelayHistory::HitDelayHistory(QSqlQuery cur) {
 	this->SongMapName = cur.value(0).toString();
 	this->RecordTime = cur.value(1).toString();
-	this->AvgDelay = cur.value(2).toDouble();
-	this->AllKeys = cur.value(3).toInt();
-	this->AvgAcc = cur.value(4).toDouble();
-	this->HitMap = cur.value(5).toString();
+	this->Keys = cur.value(2).toString();
+	this->Diffcuty = cur.value(3).toString();
+	this->AvgDelay = cur.value(4).toDouble();
+	this->AllKeys = cur.value(5).toInt();
+	this->AvgAcc = cur.value(6).toDouble();
+	this->HitMap = cur.value(7).toString();
 	isInsert = false;
 }
 
-HitDelayHistory::HitDelayHistory(QString songMapName, QString recordTime,
-	double avgDelay, int allKeys, double avgAcc, QString hitMap) {
+HitDelayHistory::HitDelayHistory(QSqlQuery cur, bool insert) {
+	this->SongMapName = cur.value(0).toString();
+	this->RecordTime = cur.value(1).toString();
+	this->Keys = cur.value(2).toString();
+	this->Diffcuty = cur.value(3).toString();
+	this->AvgDelay = cur.value(4).toDouble();
+	this->AllKeys = cur.value(5).toInt();
+	this->AvgAcc = cur.value(6).toDouble();
+	this->HitMap = cur.value(7).toString();
+	isInsert = insert;
+}
+
+HitDelayHistory::HitDelayHistory(QString songMapName, QString recordTime, QString keys,
+	QString diffcuty, double avgDelay, int allKeys, double avgAcc, QString hitMap) {
 	this->SongMapName = songMapName;
 	this->RecordTime = recordTime;
+	this->Keys = keys;
+	this->Diffcuty = diffcuty;
 	this->AvgDelay = avgDelay;
 	this->AllKeys = allKeys;
 	this->AvgAcc = avgAcc;
